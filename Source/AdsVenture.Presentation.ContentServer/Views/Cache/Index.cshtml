@@ -1,0 +1,65 @@
+﻿@model IEnumerable<AdsVenture.Presentation.ContentServer.Controllers.CacheController.Item>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="none" />
+    <title>Cache</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Key)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Count)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Size)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Key)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Count)
+            </td>
+            <td>
+                @String.Format("{0:n0}", item.Size)
+            </td>
+            <td>
+                <form method="post">
+                    <input type="hidden" name="removeKey" value="@item.Key">
+                    <button>Remove</button>
+                </form>
+            </td>
+        </tr>
+    }
+    
+    </table>
+
+    <p>TOTAL = @String.Format("{0:n0}", ViewBag.TotalSize) bytes</p>
+
+    <form method="post">
+        <input type="hidden" name="removeAll" value="1">
+        <button>Remove All</button>
+    </form>
+</body>
+</html>
