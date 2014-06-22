@@ -1,7 +1,7 @@
 ﻿using System.Transactions;
 using Bardock.Utils.Web.Mvc;
 
-namespace AdsVenture.Presentation.ContentServer.Controllers
+namespace AdsVenture.Presentation.ContentServer.Controllers.Api
 {
     public class _BaseApiController : BaseApiController
     {

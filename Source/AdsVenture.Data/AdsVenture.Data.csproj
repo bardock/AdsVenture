@@ -77,6 +77,10 @@
     <Compile Include="DTO\MediaObjectBasic.cs" />
     <Compile Include="Exceptions\DuplicatedEntryException.cs" />
     <Compile Include="Helpers\ConfigSection.cs" />
+    <Compile Include="Migrations\201406222220537_Initial.cs" />
+    <Compile Include="Migrations\201406222220537_Initial.Designer.cs">
+      <DependentUpon>201406222220537_Initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -95,6 +99,11 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201406222220537_Initial.resx">
+      <DependentUpon>201406222220537_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

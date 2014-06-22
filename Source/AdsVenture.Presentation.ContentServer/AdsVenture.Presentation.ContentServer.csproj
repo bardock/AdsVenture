@@ -208,9 +208,10 @@
     <Compile Include="App_Start\ModelBindersConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Api\ContentController.cs" />
     <Compile Include="Controllers\ContentReferenceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\_BaseApiController.cs" />
+    <Compile Include="Controllers\Api\_BaseApiController.cs" />
     <Compile Include="Filters\AccessCodeAttribute.cs" />
     <Compile Include="Filters\ExceptionHandlingAttribute.cs" />
     <Compile Include="Filters\ExceptionLogging.cs" />

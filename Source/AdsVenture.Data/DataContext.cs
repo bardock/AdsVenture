@@ -33,6 +33,11 @@ namespace AdsVenture.Data
         public DbSet<Country> Countries { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Advertiser> Advertisers { get; set; }
+        public DbSet<Publisher> Publishers { get; set; }
+        public DbSet<Content> Contents { get; set; }
+        public DbSet<ContentImpression> ContentImpressions { get; set; }
+        public DbSet<Slot> Slots { get; set; }
 
         #endregion
 

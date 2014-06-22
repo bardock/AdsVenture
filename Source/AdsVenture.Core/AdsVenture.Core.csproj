@@ -114,6 +114,7 @@
     <Compile Include="Extensions\Entities\ICountryNavigatorExtensions.cs" />
     <Compile Include="Helpers\UnitOfWork.cs" />
     <Compile Include="Managers\IManager.cs" />
+    <Compile Include="Managers\ContentManager.cs" />
     <Compile Include="Managers\UserManager.cs" />
     <Compile Include="Managers\_BaseEntityManager.cs" />
     <Compile Include="Managers\_BaseManager.cs" />

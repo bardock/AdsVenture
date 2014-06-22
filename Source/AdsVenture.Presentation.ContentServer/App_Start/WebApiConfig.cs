@@ -65,6 +65,8 @@ namespace AdsVenture.Presentation.ContentServer
 
         public static void Register(HttpConfiguration config)
         {
+            config.EnableCors(WebApiApplication.ServiceLocator.GetService<EnableCorsAttribute>());
+
             Routes(config);
             Formatters(config);
             Filters(config);

@@ -57,6 +57,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Publisher.cs" />
+    <Compile Include="Advertiser.cs" />
+    <Compile Include="ContentImpression.cs" />
+    <Compile Include="Slot.cs" />
+    <Compile Include="Content.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="DataAnotations\EntityDisplayNameAttribute.cs" />
     <Compile Include="Interfaces\ILanguageNavigator.cs" />

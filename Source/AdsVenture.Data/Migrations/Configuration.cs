@@ -260,7 +260,6 @@ namespace AdsVenture.Data.Migrations
             );
             context.SaveChanges();
 
-            //TODO: Replace by real languages
             context.Languages.AddOrUpdate(
                 new Language()
                 {
@@ -283,11 +282,49 @@ namespace AdsVenture.Data.Migrations
             );
             context.SaveChanges();
 
-            //SeedTestData(context);
+            SeedTestData(context);
         }
 
         private void SeedTestData(DataContext context)
         {
+            var adv1 = new Advertiser()
+            {
+                ID = Guid.Parse("dd8e88b7473844eba101aab216e5bed1"),
+                Name = "adv1",
+                CountryID = 1
+            };
+            context.Advertisers.AddOrUpdate(adv1);
+            context.SaveChanges();
+
+            var pub1 = new Publisher()
+            {
+                ID = Guid.Parse("66b0cd5e1c214307a5192204022dbceb"),
+                Name = "pub1",
+                CountryID = 1
+            };
+            context.Publishers.AddOrUpdate(pub1);
+            context.SaveChanges();
+
+            var contentRef1 = new Content()
+            {
+                ID = Guid.Parse("27c26f25af8d4e0d9004517aa31aaf16"),
+                Title = "Ref1",
+                AdvertiserID = adv1.ID,
+                Url = "//adv1.content.avt.com/ContentReference/SampleFluidExternal"
+            };
+            context.Contents.AddOrUpdate(contentRef1);
+            context.SaveChanges();
+
+            context.Slots.AddOrUpdate(
+                new Slot()
+                {
+                    ID = Guid.Parse("5711d654bb2f411b8dafc4369e74e553"),
+                    Title = "Slot1",
+                    PublisherID = pub1.ID,
+                    ContentID = contentRef1.ID
+                }
+            );
+            context.SaveChanges();
         }
     }
 }
