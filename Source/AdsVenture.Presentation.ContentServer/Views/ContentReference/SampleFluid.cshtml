@@ -1,15 +1,6 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
-<div id="fb-root"></div>
-<script>
-(function (d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "@Url.Content("//dev.content.avt.com/scripts/publisher/sdk.js")";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'avt-publisher-sdk'));</script>
 
 <style>
     .avt-container {
@@ -27,6 +18,18 @@
         height: 100%;
     }
 </style>
-<div class="avt-container">
+
+<script>
+(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "@Url.Content("//dev.content.avt.com/scripts/publisher/sdk.js")";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'avt-publisher-sdk'));</script>
+
+<div id="test1" class="avt-container">
 </div>
 
+<div id="test2" class="avt-container">
+</div>
