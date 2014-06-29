@@ -315,6 +315,17 @@ namespace AdsVenture.Data.Migrations
             context.Contents.AddOrUpdate(contentRef1);
             context.SaveChanges();
 
+            context.Campaigns.AddOrUpdate(
+                new Campaign()
+                {
+                    ID = Guid.Parse("1b8dafc4369e74e5535711d654bb2f41"),
+                    Title = "Campaign1",
+                    AdvertiserID = adv1.ID,
+                    CreatedOn = DateTime.UtcNow
+                }
+            );
+            context.SaveChanges();
+
             context.Slots.AddOrUpdate(
                 new Slot()
                 {

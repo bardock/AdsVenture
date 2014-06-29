@@ -35,7 +35,7 @@ module Publisher {
 
             style.type = 'text/css';
             if (style.styleSheet)
-              style.styleSheet.cssText = css;
+              (<any>style.styleSheet).cssText = css;
              else
               style.appendChild(document.createTextNode(css));
             head.insertBefore(style, head.firstChild);

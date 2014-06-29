@@ -22,7 +22,7 @@ namespace AdsVenture.Presentation.ContentServer.Controllers.Api
         [Route("slot/{slotID}")]
         public string RenderSlot(Guid slotID)
         {
-            var c = _contentManager.FindForSlot(slotID);
+            var c = _contentManager.Impress(slotID);
             return _contentManager.Render(c);
         }
     }

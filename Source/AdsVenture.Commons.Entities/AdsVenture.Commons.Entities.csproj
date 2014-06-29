@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Campaign.cs" />
     <Compile Include="Publisher.cs" />
     <Compile Include="Advertiser.cs" />
     <Compile Include="ContentImpression.cs" />

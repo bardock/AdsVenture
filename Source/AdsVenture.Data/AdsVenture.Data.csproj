@@ -53,8 +53,9 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="log4net">
-      <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Sixeyed.Caching">
       <HintPath>..\packages\Sixeyed.Caching-Bardock.1.0.0-beta1\lib\net40\Sixeyed.Caching.dll</HintPath>
@@ -81,6 +82,10 @@
     <Compile Include="Migrations\201406222220537_Initial.Designer.cs">
       <DependentUpon>201406222220537_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201406292240460_Campaign-Create.cs" />
+    <Compile Include="Migrations\201406292240460_Campaign-Create.Designer.cs">
+      <DependentUpon>201406292240460_Campaign-Create.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -103,6 +108,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201406222220537_Initial.resx">
       <DependentUpon>201406222220537_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201406292240460_Campaign-Create.resx">
+      <DependentUpon>201406292240460_Campaign-Create.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

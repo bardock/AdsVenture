@@ -16,7 +16,7 @@ namespace AdsVenture.Core.Managers
         {
         }
 
-        public Content FindForSlot(Guid slotID)
+        public Content Impress(Guid slotID)
         {
             var slot = Db.Slots
                 .AsNoTracking()
@@ -26,7 +26,29 @@ namespace AdsVenture.Core.Managers
             if (slot.ContentID == null)
                 throw new NotImplementedException("Slot has not a content");
 
-            return slot.Content;
+            var content = slot.Content;
+            var advertiserID = content.AdvertiserID;
+
+            var campaign = Db.Campaigns
+                .AsNoTracking()
+                .Where(x => x.AdvertiserID == advertiserID)
+                .Where(x => x.Active)
+                .Where(x => x.EndsOn == null || x.EndsOn > DateTime.UtcNow)
+                .FirstOrDefault();
+
+            if (campaign == null)
+                throw new Exceptions.BusinessException(string.Format("There is no active campaign for advertiser '{0}'", advertiserID.ToString("n")));
+
+            var impression = new ContentImpression()
+            {
+                ContentID = content.ID,
+                CampaignID = campaign.ID,
+                SlotID = slot.ID,
+                CreatedOn = DateTime.UtcNow
+            };
+            Db.Add(impression).SaveChanges();
+
+            return content;
         }
 
         public string Render(Content e)
