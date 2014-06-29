@@ -3,6 +3,7 @@ module Publisher {
     export class SDK {
 
         constructor() {
+            this.initStyles();
             var containers = document.querySelectorAll(".avt-container");
             for (var i = 0; i < containers.length; i++) {
                 var c = <HTMLElement>containers[i];
@@ -13,6 +14,31 @@ module Publisher {
                     this.getAppendContentHandler(c)
                 );
             }
+        }
+
+        private initStyles() {
+            var css = ".avt-container {" +
+                            "width: 100%;" +
+                            "height: 300px;" +
+                            "position: relative;" +
+                        "}" +
+                        ".avt-container iframe {" +
+                            "border: 1px solid gray;" +
+                            "width: 100%;" +
+                            "position: absolute;" +
+                            "top: 0;" +
+                            "left: 0;" +
+                            "height: 100%;" +
+                        "}",
+                head = document.head || document.getElementsByTagName('head')[0],
+                style = document.createElement('style');
+
+            style.type = 'text/css';
+            if (style.styleSheet)
+              style.styleSheet.cssText = css;
+             else
+              style.appendChild(document.createTextNode(css));
+            head.insertBefore(style, head.firstChild);
         }
 
         private getAppendContentHandler(container: HTMLElement) {
