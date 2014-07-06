@@ -31,8 +31,23 @@
 <body>
     <div id="sample">
         <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
+        <div class="box">
+            <a href="/">Link</a>
+        </div>
+        <div class="box">
+            <a href="http://google.com" target="_blank">Link Target Blankx</a>
+        </div>
     </div>
+
+
+    <script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "@Url.Content("//dev.content.avt.com/scripts/advertiser/sdk.js")";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'avt-publisher-sdk'));</script>
+
 </body>
 </html>

@@ -2,6 +2,19 @@ var Publisher;
 (function (Publisher) {
     var SDK = (function () {
         function SDK() {
+            this.on = (function () {
+                if ("addEventListener" in window) {
+                    return function (target, type, listener) {
+                        target.addEventListener(type, listener, false);
+                    };
+                } else {
+                    return function (object, sEvent, fpNotify) {
+                        object.attachEvent("on" + sEvent, function () {
+                            fpNotify(window.event);
+                        });
+                    };
+                }
+            }());
             this.initStyles();
             var containers = document.querySelectorAll(".avt-container");
             for (var i = 0; i < containers.length; i++) {
@@ -24,8 +37,25 @@ var Publisher;
         };
 
         SDK.prototype.getAppendContentHandler = function (container) {
+            var _this = this;
             return function (response) {
-                container.insertAdjacentHTML('beforeend', response);
+                //container.insertAdjacentHTML('beforeend', response);
+                //var iframe = <HTMLIFrameElement>container.lastChild;
+                // TODO check is iframe
+                var wrapper = document.createElement('div');
+                wrapper.innerHTML = response;
+                var iframe = wrapper.firstChild;
+                iframe.src = iframe.src + (iframe.src.indexOf("?") == -1 ? "?" : "&") + "avt_ref=" + encodeURIComponent(window.location.href);
+
+                _this.on(iframe, "load", function (e) {
+                    _this.on(window, 'message', function (e) {
+                        if (iframe.src.indexOf(e.origin) == -1)
+                            return;
+                        console.log(JSON.parse(e.data));
+                    });
+                });
+
+                container.appendChild(iframe);
             };
         };
 

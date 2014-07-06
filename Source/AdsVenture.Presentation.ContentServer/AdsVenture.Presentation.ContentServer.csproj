@@ -307,6 +307,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Scripts\Advertiser\SDK.ts" />
     <TypeScriptCompile Include="Scripts\Publisher\SDK.ts" />
   </ItemGroup>
   <PropertyGroup>
