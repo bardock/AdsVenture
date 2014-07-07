@@ -11,7 +11,8 @@ module Publisher {
                 if (!slot) return;
                 this.api("GET",
                     "http://dev.content.avt.com/api/content/slot/" + slot,
-                    this.getAppendContentHandler(c)
+                    null,
+                    this.getAppendContentHandler(c, slot)
                 );
             }
         }
@@ -41,25 +42,33 @@ module Publisher {
             head.insertBefore(style, head.firstChild);
         }
 
-        private getAppendContentHandler(container: HTMLElement) {
+        private getAppendContentHandler(container: HTMLElement, slotID: string) {
             return response => {
+                var contentID = response.contentID;
+
                 //container.insertAdjacentHTML('beforeend', response);
                 //var iframe = <HTMLIFrameElement>container.lastChild;
 
                 // TODO check is iframe
                 var wrapper = document.createElement('div');
-                wrapper.innerHTML = response;
+                wrapper.innerHTML = response.html;
                 var iframe = <HTMLIFrameElement>wrapper.firstChild;
                 iframe.src = iframe.src
                     + (iframe.src.indexOf("?") == -1 ? "?" : "&")
-                    + "avt_ref="
+                    + "avt_ref=" // TODO
                     + encodeURIComponent(window.location.href);
 
                 this.on(iframe, "load", (e) => {
                     this.on(window, 'message', (e) => {
                         if (iframe.src.indexOf(e.origin) == -1)
                             return;
-                        console.log(JSON.parse(e.data));
+                        var data = JSON.parse(e.data);
+                        console.log(data); // TODO remove
+                        data.contentID = contentID;
+                        this.api("POST",
+                            "http://dev.content.avt.com/api/content/slot/" + slotID + "/event",
+                            data
+                        );
                     });
                 });
 
@@ -68,7 +77,7 @@ module Publisher {
         }
 
         // TODO: move to a helper class
-        api(method: string, url: string, onSuccess: (any) => void) {
+        api(method: string, url: string, data, onSuccess?: (any) => void) {
             var xmlhttp: XMLHttpRequest =
                 (<any>window).XMLHttpRequest
                     ? new XMLHttpRequest()
@@ -76,17 +85,22 @@ module Publisher {
 
             xmlhttp.onreadystatechange = function () {
                 if (xmlhttp.readyState == 4) {
-                    if (xmlhttp.status == 200) {
-                        onSuccess(JSON.parse(xmlhttp.responseText));
+                    if (xmlhttp.status >= 200 && xmlhttp.status < 300) {
+                        if(onSuccess)
+                            onSuccess(xmlhttp.responseText && JSON.parse(xmlhttp.responseText) || null);
                     }
                     else {
                         console.error('AJAX request error ' + xmlhttp.status)
                     }
                 }
             }
-
             xmlhttp.open(method, url, true);
-            xmlhttp.send();
+            if (data) {
+                xmlhttp.setRequestHeader("Content-type", "application/json");
+                xmlhttp.send(JSON.stringify(data));
+            } else {
+                xmlhttp.send();
+            }
         }
 
         on = (function () {

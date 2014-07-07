@@ -61,6 +61,7 @@
     <Compile Include="Publisher.cs" />
     <Compile Include="Advertiser.cs" />
     <Compile Include="ContentImpression.cs" />
+    <Compile Include="SlotEvent.cs" />
     <Compile Include="Slot.cs" />
     <Compile Include="Content.cs" />
     <Compile Include="Country.cs" />

@@ -2,17 +2,38 @@ var Advertiser;
 (function (Advertiser) {
     var SDK = (function () {
         function SDK() {
-            var referrer = document.referrer;
-
-            document.getElementsByTagName("body")[0].onclick = function (e) {
-                window.parent.postMessage(JSON.stringify({
-                    action: "click",
-                    target: e.target.tagName,
-                    x: e.x,
-                    y: e.y
-                }), referrer);
+            var _this = this;
+            this.referrer = document.referrer;
+            var body = document.getElementsByTagName("body")[0];
+            body.onclick = function (e) {
+                return _this.handleEvent(e);
+            };
+            body.onsubmit = function (e) {
+                return _this.handleEvent(e);
             };
         }
+        SDK.prototype.handleEvent = function (e) {
+            var target = e.target;
+            window.parent.postMessage(JSON.stringify({
+                eventType: e.type,
+                positionX: e.x,
+                positionY: e.y,
+                target: {
+                    tagName: target.tagName,
+                    elemId: target.getAttribute("id"),
+                    elemClass: target.getAttribute("class"),
+                    name: target.getAttribute("name"),
+                    type: target.getAttribute("type"),
+                    value: (target.tagName == "A" || target.tagName == "BUTTON" ? target.innerText : target.getAttribute("value")),
+                    href: target.getAttribute("href"),
+                    onclick: target.getAttribute("onclick"),
+                    action: target.getAttribute("action"),
+                    method: target.getAttribute("method")
+                },
+                date: new Date()
+            }), this.referrer);
+        };
+
         SDK.prototype.getQueryValue = function (name) {
             var q = window.location.search;
             var params = q.split(/[\?&]+/);

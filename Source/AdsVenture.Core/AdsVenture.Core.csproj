@@ -98,6 +98,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="DTO\SlotEvent.cs" />
     <Compile Include="Exceptions\BusinessException.cs" />
     <Compile Include="Exceptions\BusinessUserException.cs" />
     <Compile Include="Exceptions\EntityAlreadyExistsException.cs" />
@@ -149,9 +150,7 @@
       <Name>AdsVenture.Data</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DTO\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Resources\BusinessExceptions.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

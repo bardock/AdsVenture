@@ -86,6 +86,14 @@
     <Compile Include="Migrations\201406292240460_Campaign-Create.Designer.cs">
       <DependentUpon>201406292240460_Campaign-Create.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201407070143001_SlotEvent.cs" />
+    <Compile Include="Migrations\201407070143001_SlotEvent.Designer.cs">
+      <DependentUpon>201407070143001_SlotEvent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201407070155462_SlotEvent-Date.cs" />
+    <Compile Include="Migrations\201407070155462_SlotEvent-Date.Designer.cs">
+      <DependentUpon>201407070155462_SlotEvent-Date.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -111,6 +119,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201406292240460_Campaign-Create.resx">
       <DependentUpon>201406292240460_Campaign-Create.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407070143001_SlotEvent.resx">
+      <DependentUpon>201407070143001_SlotEvent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407070155462_SlotEvent-Date.resx">
+      <DependentUpon>201407070155462_SlotEvent-Date.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

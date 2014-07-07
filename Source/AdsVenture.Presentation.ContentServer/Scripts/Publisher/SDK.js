@@ -22,7 +22,7 @@ var Publisher;
                 var slot = c.getAttribute("data-slot");
                 if (!slot)
                     return;
-                this.api("GET", "http://dev.content.avt.com/api/content/slot/" + slot, this.getAppendContentHandler(c));
+                this.api("GET", "http://dev.content.avt.com/api/content/slot/" + slot, null, this.getAppendContentHandler(c, slot));
             }
         }
         SDK.prototype.initStyles = function () {
@@ -36,14 +36,16 @@ var Publisher;
             head.insertBefore(style, head.firstChild);
         };
 
-        SDK.prototype.getAppendContentHandler = function (container) {
+        SDK.prototype.getAppendContentHandler = function (container, slotID) {
             var _this = this;
             return function (response) {
+                var contentID = response.contentID;
+
                 //container.insertAdjacentHTML('beforeend', response);
                 //var iframe = <HTMLIFrameElement>container.lastChild;
                 // TODO check is iframe
                 var wrapper = document.createElement('div');
-                wrapper.innerHTML = response;
+                wrapper.innerHTML = response.html;
                 var iframe = wrapper.firstChild;
                 iframe.src = iframe.src + (iframe.src.indexOf("?") == -1 ? "?" : "&") + "avt_ref=" + encodeURIComponent(window.location.href);
 
@@ -51,7 +53,10 @@ var Publisher;
                     _this.on(window, 'message', function (e) {
                         if (iframe.src.indexOf(e.origin) == -1)
                             return;
-                        console.log(JSON.parse(e.data));
+                        var data = JSON.parse(e.data);
+                        console.log(data); // TODO remove
+                        data.contentID = contentID;
+                        _this.api("POST", "http://dev.content.avt.com/api/content/slot/" + slotID + "/event", data);
                     });
                 });
 
@@ -60,21 +65,26 @@ var Publisher;
         };
 
         // TODO: move to a helper class
-        SDK.prototype.api = function (method, url, onSuccess) {
+        SDK.prototype.api = function (method, url, data, onSuccess) {
             var xmlhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
 
             xmlhttp.onreadystatechange = function () {
                 if (xmlhttp.readyState == 4) {
-                    if (xmlhttp.status == 200) {
-                        onSuccess(JSON.parse(xmlhttp.responseText));
+                    if (xmlhttp.status >= 200 && xmlhttp.status < 300) {
+                        if (onSuccess)
+                            onSuccess(xmlhttp.responseText && JSON.parse(xmlhttp.responseText) || null);
                     } else {
                         console.error('AJAX request error ' + xmlhttp.status);
                     }
                 }
             };
-
             xmlhttp.open(method, url, true);
-            xmlhttp.send();
+            if (data) {
+                xmlhttp.setRequestHeader("Content-type", "application/json");
+                xmlhttp.send(JSON.stringify(data));
+            } else {
+                xmlhttp.send();
+            }
         };
         return SDK;
     })();

@@ -30,12 +30,17 @@
 </head>
 <body>
     <div id="sample">
-        <div class="box"></div>
         <div class="box">
-            <a href="/">Link</a>
+            <form action="" method="post" target="_blank">
+                <button>Submit</button>
+            </form>
+        </div>
+        <div class="box">
+            <a href="/" onclick="return true">Link</a>
         </div>
         <div class="box">
             <a href="http://google.com" target="_blank">Link Target Blankx</a>
+            <input type="button" value="ok" name="btnOk" />
         </div>
     </div>
 

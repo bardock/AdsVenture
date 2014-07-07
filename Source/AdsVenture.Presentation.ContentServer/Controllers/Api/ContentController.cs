@@ -20,10 +20,22 @@ namespace AdsVenture.Presentation.ContentServer.Controllers.Api
 
         [HttpGet]
         [Route("slot/{slotID}")]
-        public string RenderSlot(Guid slotID)
+        public object RenderSlot(Guid slotID)
         {
             var c = _contentManager.Impress(slotID);
-            return _contentManager.Render(c);
+            return new
+            {
+                ContentID = c.ID,
+                Html = _contentManager.Render(c)
+            };
+        }
+
+        [HttpPost]
+        [Route("slot/{slotID}/event")]
+        public void PostSlotEvent(Guid slotID, Core.DTO.SlotEvent data)
+        {
+            data.SlotID = slotID;
+            _contentManager.CreateSlotEvent(data);
         }
     }
 }

@@ -44,6 +44,8 @@ namespace AdsVenture.Core
 
         private static void InitMappings()
         {
+            AutoMapper.Mapper.CreateMap<DTO.SlotEvent, Commons.Entities.SlotEvent>();
+            AutoMapper.Mapper.CreateMap<DTO.SlotEventTarget, Commons.Entities.SlotEventTarget>();
         }
 
     }

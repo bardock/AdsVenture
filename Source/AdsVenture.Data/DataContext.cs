@@ -26,6 +26,13 @@ namespace AdsVenture.Data
             modelBuilder.Properties<string>().Configure(p => p.IsUnicode(false));
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+
+            // SlotEvent & Target (Table Splitting)
+            modelBuilder.Entity<SlotEvent>()
+                        .HasRequired(e => e.Target)
+                        .WithRequiredPrincipal();
+            modelBuilder.Entity<SlotEvent>().ToTable("SlotEvent");
+            modelBuilder.Entity<SlotEventTarget>().ToTable("SlotEvent");
         }
 
         #region DbSets
@@ -39,6 +46,7 @@ namespace AdsVenture.Data
         public DbSet<ContentImpression> ContentImpressions { get; set; }
         public DbSet<Campaign> Campaigns { get; set; }
         public DbSet<Slot> Slots { get; set; }
+        public DbSet<SlotEvent> SlotEvents { get; set; }
 
         #endregion
 

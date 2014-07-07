@@ -1,5 +1,6 @@
 ﻿using AdsVenture.Commons.Entities;
 using AdsVenture.Core.Exceptions;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -54,6 +55,13 @@ namespace AdsVenture.Core.Managers
         public string Render(Content e)
         {
             return string.Format("<iframe src=\"{0}\"></iframe>", e.Url);
+        }
+
+        public void CreateSlotEvent(DTO.SlotEvent data)
+        {
+            var e = Mapper.Map<SlotEvent>(data);
+            e.ID = Guid.NewGuid();
+            Db.Add(e).SaveChanges();
         }
     }
 }
