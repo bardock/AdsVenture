@@ -14,7 +14,7 @@ namespace AdsVenture.Presentation.ContentServer.Filters
             Bardock.Utils.Logger.ILog log = null;
             try
             {
-                log = Bardock.Utils.Logger.Manager.GetLog<ExceptionLogging>();
+                log = Bardock.Utils.Logger.LogManager.Default.GetLog<ExceptionLogging>();
 
                 // Ignore some exception types
                 if (exc == null || exc is System.Threading.ThreadAbortException || exc is HttpException && ((HttpException)exc).GetHttpCode().In(401, 403, 404))

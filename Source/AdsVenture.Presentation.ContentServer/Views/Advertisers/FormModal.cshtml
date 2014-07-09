@@ -1,0 +1,59 @@
+﻿@using Bardock.Utils.Web.Mvc.Extensions
+@using Bardock.Utils.Extensions
+@using AdsVenture.Core.Helpers.Extensions.Entities
+@using AdsVenture.Commons.Entities.Resources
+@using AdsVenture.Presentation.ContentServer.Helpers.Extensions
+
+@model AdsVenture.Presentation.ContentServer.Models.Advertisers.FormModal
+
+@{
+    var HtmlEntity = Html.ToModel<Advertiser>();
+}
+
+<div id="@Model.ID" class="modal hide modal_mini modalMgEdit" data-backdrop="true" tabindex="-1" role="dialog" aria-labelledby="modalMediaGroupForm_title" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="modalFormMediaGroup_title">
+            @Entities.MediaGroup
+            <span class="group-id"></span>
+        </h3>
+    </div>
+    <form method="post" action="@Model.SubmitUrl">
+        <div class="modal-body">
+            @if (Model.IsEdit)
+            {
+                @HtmlEntity.HiddenFor(m => m.ID)
+            }
+
+            <h6>@HtmlEntity.DisplayNameFor(m => m.Description)</h6>
+            @HtmlEntity.TextBox2For(m => m.Description)
+
+            <h6>@HtmlEntity.DisplayNameFor(m => m.LineColor)</h6>
+            @HtmlEntity.TextBox2For(m => m.LineColor, new Dictionary<string, object>() { { "data-control", "hue" } })
+
+            <h6>@HtmlEntity.DisplayNameFor(m => m.LineStyle)</h6>
+            <select name="@HtmlEntity.DisplayLiteral(m => m.LineStyleID)">
+                @{
+                    var selectedValue = (int)LineStyle.Options.Solid;
+                    foreach (var item in AdsVenture.Presentation.ContentServer.Helpers.Extensions.DropDownListExtensions.EnumOption.BuildList(typeof(LineStyle.Options)))
+                    {
+                        <option value="@item.Value" data-enum-name="@item.Name"
+                                @if(selectedValue == item.Value) { 
+                                    @:selected
+                                }>
+                            @item.Description
+                        </option>
+                    }
+                }
+            </select>
+
+            <h6>@Resources.Global.Category</h6>
+            @HtmlEntity.DropDownListForEnum2(x => x.CategoryID, typeof(AdvertiserCategory.Options), defaultLabel: String.Empty)
+
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">@Resources.Global.Save</button>
+            <button class="btn btn-link btn_negative" data-dismiss="modal" aria-hidden="true">@Resources.Global.Cancel</button>
+        </div>
+    </form>
+</div>

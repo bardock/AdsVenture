@@ -1,19 +1,21 @@
-﻿using AdsVenture.Presentation.ContentServer.Helpers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Web;
+using System.Web.Mvc;
 
 namespace AdsVenture.Presentation.ContentServer.Filters
 {
-    public class AccessCodeAttribute : Bardock.Utils.Web.Mvc.Filters.HttpAccessCodeAttribute
+    public class AccessCodeAttribute : Bardock.Utils.Web.Mvc.Filters.AccessCodeAttribute
     {
-        public AccessCodeAttribute()
-            : base()
+        public AccessCodeAttribute() : base()
         {
-            this.ParamName = ConfigSection.Default.AccessCodeConfiguration.ParamName;
-            this.Code = ConfigSection.Default.AccessCodeConfiguration.Code;
+            //Filter.Code = Helpers.ConfigSection.Default.AccessCode.Value;
+        }
+
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            base.OnActionExecuting(filterContext);
         }
     }
 }

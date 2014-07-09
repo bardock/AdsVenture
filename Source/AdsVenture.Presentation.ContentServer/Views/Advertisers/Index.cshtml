@@ -1,0 +1,53 @@
+﻿@using Bardock.Utils.Web.Mvc.Extensions
+@using AdsVenture.Presentation.ContentServer.Helpers
+@using AdsVenture.Presentation.ContentServer.Controllers
+@using AdsVenture.Commons.Entities.Resources
+@using AdsVenture.Presentation.ContentServer.Models.Advertisers;
+
+@{
+    ViewBag.IsExcelExportable = false;
+    ViewBag.IsPdfExportable = false;
+    var HtmlMediaGroup = Html.ToModel<AdsVenture.Commons.Entities.Advertiser>();
+}
+
+
+<div class="row-fluid">
+    <div class="span12 tbl_first_min">
+        @Html.Partial("Index_Table", new List<Advertiser>())
+    </div>
+
+    <!--toolbar-->
+    <footer class="footer_actions">
+        <input type="button" class="btn btn-primary" value="@Resources.Global.Add"
+               onclick="view.add.show()">
+        <input type="button" class="btn" value="@Resources.Global.Delete" onclick="view.delete.show()">
+    </footer>
+    <!--end toolbar-->
+</div>
+
+@section modals {
+
+    @Html.Partial_ConfirmModal(new AdsVenture.Presentation.ContentServer.Models.Shared.ConfirmModal()
+    {
+        ID = "modal_deleteMassive",
+        Title = Resources.Global.DeleteFiles,
+        Question = Resources.Global.ConfirmQuestion_DeleteMassive,
+        OnConfirm = "view.deleteMassive()"
+    })
+    <script id="delete-items-template" type="text/html">
+        <ul>{{#.}}<li>{{@HtmlMediaGroup.DisplayLiteral(x => x.Description)}}</li>{{/.}}</ul>
+    </script>
+
+    @Html.Partial("~/Views/Advertisers/FormModal.cshtml", new FormModal() { ID = "addModal", SubmitUrl = Url.Action("Add") })
+    @Html.Partial("~/Views/Advertisers/FormModal.cshtml", new FormModal() { ID = "editModal", SubmitUrl = Url.Action("Edit"), IsEdit = true })
+}
+
+@section scripts{
+    <script>
+        @*Resources.Error_RequiredFile = "@Html.Raw(Resources.Global.Error_RequiredFile)";*@
+
+        view = new Views.Advertisers.Index(
+            "@Html.Raw(Url.Action2("Index_Table", null))"
+        );
+    </script>
+}

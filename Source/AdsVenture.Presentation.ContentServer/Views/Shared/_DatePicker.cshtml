@@ -1,0 +1,18 @@
+﻿@using Bardock.Utils.Extensions
+@model AdsVenture.Presentation.ContentServer.Models.Shared.DatePicker
+
+<div class="input-append inline date datepicker-component @(Model.AppendCalendarMode ? "append_calendar" : String.Empty) @(Model.Disabled ? "disabled" : String.Empty)"
+     data-date-format="@DateExtensions.CurrentDateFormat().ToLower()"
+     data-date-min-view-mode="@Model.MinViewMode.ToString().ToLower()"
+     data-date-startdate="@Model.StartDate.ApplyOrDefault(x => x.DateFormat())"
+     data-date-enddate="@Model.EndDate.ApplyOrDefault(x => x.DateFormat())">
+
+    @Model.TextBoxBuilder(new Dictionary<string, object>() {
+                            {"class", "input-small " + Model.InputClass},
+                            {"readonly", "readonly"}
+                          })
+
+    <span class="add-on @(Model.Disabled ? "disabled" : String.Empty)">
+        <i class="icon-calendar icon-white"></i>
+    </span>
+</div>

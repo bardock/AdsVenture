@@ -1,0 +1,65 @@
+﻿@using AdsVenture.Commons.Security.AccessControl
+@using AdsVenture.Commons.Resources
+@using Bardock.Utils.Web.Mvc.Extensions
+<ul class="nav span11">
+    @if (this.IsAuthorized<ProgramUpload>(Actions.Read) || this.IsAuthorized<ProgramUpload>(Actions.Create)
+        || this.IsAuthorized<ProgramBroadcast>(Actions.Read) || this.IsAuthorized<ProgramRating>(Actions.Read))
+    {
+        <li class="dropdown @((this.IsController("programUploads") || this.IsController("programBroadcasts") || 
+                this.IsController("programRatings")) ? "active" : String.Empty)">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">@Shared.ProgramsRating <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                @if (this.IsAuthorized<ProgramUpload>(Actions.Read) && this.IsAuthorized<ProgramUpload>(Actions.Create))
+                {
+                    <li><a href="@Url.Action("Index", "programUploads")">@Shared.Files</a></li>
+                }
+                @if (this.IsAuthorized<ProgramBroadcast>(Actions.Read))
+                {
+                    <li><a href="@Url.Action("Index", "programBroadcasts")">@Shared.Programming</a></li>
+                }
+                @if (this.IsAuthorized<ProgramRating>(Actions.Read))
+                {
+                    <li><a href="@Url.Action("Index", "programRatings")">@Shared.Ratings</a></li>
+                }
+            </ul>
+        </li>
+    }
+    @if (this.IsAuthorized<ChannelUpload>(Actions.Read) || this.IsAuthorized<ChannelUpload>(Actions.Create)
+        || this.IsAuthorized<ChannelNetwork>(Actions.Read) || this.IsAuthorized<Advertiser>(Actions.Read)
+        || this.IsAuthorized<Advertiser>(Actions.Create) || this.IsAuthorized<ChannelRating>(Actions.Read))
+    {
+        <li class="dropdown @((this.IsController("channelUploads") || this.IsController("channelMediaGroups") || 
+                this.IsController("channelRatings") || this.IsController("channelNetworks") || 
+                this.IsController("channelReports")) ? "active" : String.Empty)">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">@Shared.ChannelsRating <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                @if (this.IsAuthorized<ChannelUpload>(Actions.Read) && this.IsAuthorized<ChannelUpload>(Actions.Create))
+                {
+                    <li><a href="@Url.Action("Index", "channelUploads")">@Shared.Files</a></li>
+                }
+                @if (this.IsAuthorized<ChannelRating>(Actions.Read))
+                {
+                    <li><a href="@Url.Action("Index", "channelRatings")">@Shared.Ratings</a></li>
+                }
+                @if (this.IsAuthorized<ChannelNetwork>(Actions.Read) && this.IsAuthorized<ChannelNetwork>(Actions.Create))
+                {
+                    <li><a href="@Url.Action("Index", "ChannelNetworks")">@Shared.Networks</a></li>
+                }
+                @if (this.IsAuthorized<Advertiser>(Actions.Read) && this.IsAuthorized<Advertiser>(Actions.Create))
+                {
+                    <li><a href="@Url.Action("Index", "Advertisers")">@Shared.MediaGroups</a></li>
+                }
+                @if (this.IsAuthorized<ChannelRating>(Actions.Read))
+                {
+                    <li class="dropdown-submenu @(this.IsController("channelReports") ? "active" : String.Empty)">
+                        <a href="@Url.Action("index", "channelReports")" class="dropdown-toggle" data-toggle="dropdown">@Shared.Reports</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("TopChannels", "channelReports")">@Shared.TopChannels</a></li>
+                            <li><a href="@Url.Action("MediaGroupRatings", "channelReports")">@Shared.MediaGroupRatings</a></li>
+                        </ul>
+                    </li>
+                }
+            </ul>
+        </li>
+    }
+</ul>
