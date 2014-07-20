@@ -291,7 +291,8 @@ namespace AdsVenture.Data.Migrations
             {
                 ID = Guid.Parse("dd8e88b7473844eba101aab216e5bed1"),
                 Name = "adv1",
-                CountryID = 1
+                CountryID = 1,
+                CreatedOn = new DateTime(2014,1,1)
             };
             context.Advertisers.AddOrUpdate(adv1);
             context.SaveChanges();

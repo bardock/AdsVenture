@@ -1,25 +1,42 @@
-﻿using AdsVenture.Commons.Pagination.Interfaces;
-using System;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace AdsVenture.Commons.Pagination
 {
-    public class PageData<T>
+    [DataContract()]
+    public class PageData<T> : IEnumerable<T>
     {
-        public IEnumerable<T> Results { get; set; }
-        public long Total { get; set; }
-        public int Offset { get; set; }
-        public int Limit { get; set; }
 
-        public PageData(IEnumerable<T> results, long total, int offset, int limit)
+        public IList<T> Data { get; set; }
+
+        public long TotalRecords { get; set; }
+
+        public int CurrentPage { get; set; }
+
+
+        public PageData(List<T> data, long totalRecords, int currentPage)
         {
-            this.Results = results;
-            this.Total = total;
-            this.Offset = offset;
-            this.Limit = limit;
+            this.Data = data;
+            this.TotalRecords = totalRecords;
+            this.CurrentPage = currentPage;
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return this.Data.GetEnumerator();
+        }
+
+        IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        public PageData<T2> Convert<T2>(Func<T, T2> conversion)
+        {
+            return new PageData<T2>(this.Data.Select(d => conversion(d)).ToList(), this.TotalRecords, this.CurrentPage);
         }
     }
 }

@@ -9,10 +9,27 @@ namespace AdsVenture.Commons.Pagination
 {
     public class PageParams : IPageParams, ISortParams
     {
-        public int Offset { get; set; }
-        public int Limit { get; set; }
-
+        public int StartIndex { get; set; }
+        public int Length { get; set; }
         public string[] SortBy { get; set; }
-        public SortDirection[] SortDir{ get; set; }
+        public SortDirs[] SortDir { get; set; }
+
+        private string _search = null;
+        public string Search
+        {
+            get { return _search; }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    _search = null;
+                }
+                else
+                {
+                    _search = value.ToLower();
+                }
+            }
+        }
+
     }
 }

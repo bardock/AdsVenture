@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AdsVenture.Commons.Pagination.Interfaces
 {
-    public enum SortDirection
+    public enum SortDirs
     {
         Asc = 0,
         Desc = 1
@@ -14,7 +14,9 @@ namespace AdsVenture.Commons.Pagination.Interfaces
 
     public interface ISortParams
     {
+
         string[] SortBy { get; set; }
-        SortDirection[] SortDir { get; set; }
+
+        SortDirs[] SortDir { get; set; }
     }
 }

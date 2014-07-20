@@ -98,6 +98,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="DTO\AdvertiserUpdate.cs" />
+    <Compile Include="DTO\AdvertiserCreate.cs" />
     <Compile Include="DTO\SlotEvent.cs" />
     <Compile Include="Exceptions\BusinessException.cs" />
     <Compile Include="Exceptions\BusinessUserException.cs" />
@@ -114,6 +116,7 @@
     <Compile Include="Helpers\ConfigSection.cs" />
     <Compile Include="Extensions\Entities\ICountryNavigatorExtensions.cs" />
     <Compile Include="Helpers\UnitOfWork.cs" />
+    <Compile Include="Managers\AdvertiserManager.cs" />
     <Compile Include="Managers\IManager.cs" />
     <Compile Include="Managers\ContentManager.cs" />
     <Compile Include="Managers\UserManager.cs" />

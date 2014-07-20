@@ -19,7 +19,6 @@ namespace AdsVenture.Core.Helpers
             get { return (ConfigSection)ConfigurationManager.GetSection("adsVenture/core"); }
         }
 
-        [DataMember]
         [ConfigurationProperty("concurrentActionContext")]
         public ConcurrentActionContextConfigurationElement ConcurrentActionContext
         {

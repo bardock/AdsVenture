@@ -8,7 +8,8 @@ namespace AdsVenture.Commons.Pagination.Interfaces
 {
     public interface IPageParams
     {
-        int Offset { get; set; }
-        int Limit { get; set; }
+        int StartIndex { get; set; }
+
+        int Length { get; set; }
     }
 }

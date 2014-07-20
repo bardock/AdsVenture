@@ -17,8 +17,15 @@ namespace AdsVenture.Commons.Entities
 
         public Country Country { get; set; }
 
+        public bool Active { get; set; }
+
+        public DateTime CreatedOn { get; set; }
+
+        public DateTime? UpdatedOn { get; set; }
+
         public Advertiser()
         {
+            this.Active = true;
         }
     }
 }

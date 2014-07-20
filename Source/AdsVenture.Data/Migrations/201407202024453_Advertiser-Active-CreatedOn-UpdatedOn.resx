@@ -117,49 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Error_ExcelReport_EmptyData" xml:space="preserve">
-    <value>There is no data to export</value>
+  <data name="Target" xml:space="preserve">
+    <value>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</value>
   </data>
-  <data name="Error_MustSelectAnyItem" xml:space="preserve">
-    <value>You must select any item</value>
-  </data>
-  <data name="Error_RequiredFile" xml:space="preserve">
-    <value>You must upload a file</value>
-  </data>
-  <data name="Error_Undefined" xml:space="preserve">
-    <value>An unexpected error has occurred</value>
-  </data>
-  <data name="Export" xml:space="preserve">
-    <value>Export</value>
-  </data>
-  <data name="Files" xml:space="preserve">
-    <value>Files</value>
-  </data>
-  <data name="Logout" xml:space="preserve">
-    <value>Logout</value>
-  </data>
-  <data name="Month" xml:space="preserve">
-    <value>Month</value>
-  </data>
-  <data name="No" xml:space="preserve">
-    <value>No</value>
-  </data>
-  <data name="Search" xml:space="preserve">
-    <value>Search</value>
-  </data>
-  <data name="Success_Add" xml:space="preserve">
-    <value>Added successfully</value>
-  </data>
-  <data name="Success_Delete" xml:space="preserve">
-    <value>Deleted successfully</value>
-  </data>
-  <data name="Success_Update" xml:space="preserve">
-    <value>Updated successfully</value>
-  </data>
-  <data name="Year" xml:space="preserve">
-    <value>Year</value>
-  </data>
-  <data name="Yes" xml:space="preserve">
-    <value>Yes</value>
+  <data name="DefaultSchema" xml:space="preserve">
+    <value>dbo</value>
   </data>
 </root>

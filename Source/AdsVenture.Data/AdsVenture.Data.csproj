@@ -94,6 +94,10 @@
     <Compile Include="Migrations\201407070155462_SlotEvent-Date.Designer.cs">
       <DependentUpon>201407070155462_SlotEvent-Date.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201407202024453_Advertiser-Active-CreatedOn-UpdatedOn.cs" />
+    <Compile Include="Migrations\201407202024453_Advertiser-Active-CreatedOn-UpdatedOn.Designer.cs">
+      <DependentUpon>201407202024453_Advertiser-Active-CreatedOn-UpdatedOn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -125,6 +129,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201407070155462_SlotEvent-Date.resx">
       <DependentUpon>201407070155462_SlotEvent-Date.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407202024453_Advertiser-Active-CreatedOn-UpdatedOn.resx">
+      <DependentUpon>201407202024453_Advertiser-Active-CreatedOn-UpdatedOn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
