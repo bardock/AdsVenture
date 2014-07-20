@@ -5,7 +5,7 @@ using Bardock.Utils.Web.Mvc;
 
 namespace AdsVenture.Presentation.ContentServer.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [SessionState(SessionStateBehavior.ReadOnly)]
     public class _BaseController : BaseController
     {

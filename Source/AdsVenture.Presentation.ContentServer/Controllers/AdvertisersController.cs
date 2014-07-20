@@ -21,10 +21,10 @@ namespace AdsVenture.Presentation.ContentServer.Controllers
         //    this._mediaGroupManager = mediagroupmanager;
         //}
 
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
+        public ActionResult Index()
+        {
+            return View();
+        }
 
         //public ActionResult Index_Table(PageParams pageParams)
         //{

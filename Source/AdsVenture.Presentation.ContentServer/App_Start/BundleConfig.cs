@@ -9,8 +9,8 @@ namespace AdsVenture.Presentation.ContentServer
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/site").Include(
-                        "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/bootstrap.js"));
+                        "~/Scripts/ThirdParty/jquery-{version}.js",
+                        "~/Scripts/ThirdParty/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css/site").Include(
                       "~/Content/css/bootstrap.css",

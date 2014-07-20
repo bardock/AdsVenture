@@ -259,9 +259,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\XmlDocument.xml" />
+    <Content Include="Content\css\bootstrap-theme.css" />
     <Content Include="Content\css\bootstrap.css" />
-    <Content Include="Content\css\bootstrap.min.css" />
-    <Content Include="Content\css\Site.css" />
+    <Content Include="Content\css\site.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -285,6 +285,8 @@
     <Content Include="Scripts\Plugins\loading.js" />
     <Content Include="Scripts\Plugins\serialize-object.js" />
     <Content Include="Scripts\Plugins\thousandsSeparator.js" />
+    <Content Include="Scripts\ThirdParty\bootstrap.js" />
+    <Content Include="Scripts\ThirdParty\jquery-2.1.1.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -329,7 +331,6 @@
   <ItemGroup>
     <Folder Include="Areas\" />
     <Folder Include="Results\" />
-    <Folder Include="Scripts\ThirdParty\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
