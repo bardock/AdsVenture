@@ -4,6 +4,102 @@
         <name>AdsVenture.Presentation.ContentServer</name>
     </assembly>
     <members>
+        <member name="T:Resources.DataTables">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Resources.DataTables.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Resources.DataTables.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Resources.DataTables.Aria_SortAscending">
+            <summary>
+              Looks up a localized string similar to : activate to sort column ascending.
+            </summary>
+        </member>
+        <member name="P:Resources.DataTables.Aria_SortDescending">
+            <summary>
+              Looks up a localized string similar to : activate to sort column descending.
+            </summary>
+        </member>
+        <member name="P:Resources.DataTables.EmptyTable">
+            <summary>
+              Looks up a localized string similar to No data available in table.
+            </summary>
+        </member>
+        <member name="P:Resources.DataTables.Info">
+            <summary>
+              Looks up a localized string similar to _START_ to _END_ from _TOTAL_ results.
+            </summary>
+        </member>
+        <member name="P:Resources.DataTables.InfoEmpty">
+            <summary>
+              Looks up a localized string similar to 0 entries.
+            </summary>
+        </member>
+        <member name="P:Resources.DataTables.InfoFiltered">
+            <summary>
+              Looks up a localized string similar to (filtered from _MAX_ total entries).
+            </summary>
+        </member>
+        <member name="P:Resources.DataTables.InfoThousands">
+            <summary>
+              Looks up a localized string similar to ,.
+            </summary>
+        </member>
+        <member name="P:Resources.DataTables.LengthMenu">
+            <summary>
+              Looks up a localized string similar to _MENU_ Results per page.
+            </summary>
+        </member>
+        <member name="P:Resources.DataTables.LoadingRecords">
+            <summary>
+              Looks up a localized string similar to Loading....
+            </summary>
+        </member>
+        <member name="P:Resources.DataTables.Paginate_First">
+            <summary>
+              Looks up a localized string similar to First.
+            </summary>
+        </member>
+        <member name="P:Resources.DataTables.Paginate_Last">
+            <summary>
+              Looks up a localized string similar to Last.
+            </summary>
+        </member>
+        <member name="P:Resources.DataTables.Paginate_Next">
+            <summary>
+              Looks up a localized string similar to &amp;rsaquo;.
+            </summary>
+        </member>
+        <member name="P:Resources.DataTables.Paginate_Previous">
+            <summary>
+              Looks up a localized string similar to &amp;lsaquo;.
+            </summary>
+        </member>
+        <member name="P:Resources.DataTables.Processing">
+            <summary>
+              Looks up a localized string similar to Processing....
+            </summary>
+        </member>
+        <member name="P:Resources.DataTables.Search">
+            <summary>
+              Looks up a localized string similar to .
+            </summary>
+        </member>
+        <member name="P:Resources.DataTables.ZeroRecords">
+            <summary>
+              Looks up a localized string similar to No matching records found.
+            </summary>
+        </member>
         <member name="T:Resources.Global">
             <summary>
               A strongly-typed resource class, for looking up localized strings, etc.
@@ -20,14 +116,185 @@
               resource lookups using this strongly typed resource class.
             </summary>
         </member>
-        <member name="P:Resources.Global.Auth_UserDoesNotHaveAccessToProfile">
+        <member name="P:Resources.Global.Accept">
             <summary>
-              Looks up a localized string similar to Authenticated user does not have access to requested profile.
+              Looks up a localized string similar to Accept.
             </summary>
         </member>
-        <member name="P:Resources.Global.Auth_UserDoesNotHaveAccessToUser">
+        <member name="P:Resources.Global.Add">
             <summary>
-              Looks up a localized string similar to Authenticated user does not have access to requested user.
+              Looks up a localized string similar to Add.
+            </summary>
+        </member>
+        <member name="P:Resources.Global.AddFile">
+            <summary>
+              Looks up a localized string similar to Add file.
+            </summary>
+        </member>
+        <member name="P:Resources.Global.AdvancedSearch">
+            <summary>
+              Looks up a localized string similar to Advanced search.
+            </summary>
+        </member>
+        <member name="P:Resources.Global.AppName">
+            <summary>
+              Looks up a localized string similar to PLG.
+            </summary>
+        </member>
+        <member name="P:Resources.Global.Cancel">
+            <summary>
+              Looks up a localized string similar to Cancel.
+            </summary>
+        </member>
+        <member name="P:Resources.Global.Category">
+            <summary>
+              Looks up a localized string similar to Category.
+            </summary>
+        </member>
+        <member name="P:Resources.Global.ConfirmQuestion_DeleteMassive">
+            <summary>
+              Looks up a localized string similar to The following items will be removed from database:.
+            </summary>
+        </member>
+        <member name="P:Resources.Global.Delete">
+            <summary>
+              Looks up a localized string similar to Delete.
+            </summary>
+        </member>
+        <member name="P:Resources.Global.DeleteFiles">
+            <summary>
+              Looks up a localized string similar to Delete files.
+            </summary>
+        </member>
+        <member name="P:Resources.Global.DownloadFile">
+            <summary>
+              Looks up a localized string similar to Download file.
+            </summary>
+        </member>
+        <member name="P:Resources.Global.Error_RequiredFile">
+            <summary>
+              Looks up a localized string similar to You must upload a file.
+            </summary>
+        </member>
+        <member name="P:Resources.Global.File">
+            <summary>
+              Looks up a localized string similar to File.
+            </summary>
+        </member>
+        <member name="P:Resources.Global.FileName">
+            <summary>
+              Looks up a localized string similar to File Name.
+            </summary>
+        </member>
+        <member name="P:Resources.Global.FileUpload_Button">
+            <summary>
+              Looks up a localized string similar to select the file from your computer.
+            </summary>
+        </member>
+        <member name="P:Resources.Global.FileUpload_Button_NoDroppable">
+            <summary>
+              Looks up a localized string similar to To attach the file select the file from your computer.
+            </summary>
+        </member>
+        <member name="P:Resources.Global.FileUpload_Drop">
+            <summary>
+              Looks up a localized string similar to To attach the file drag &amp; drop here or.
+            </summary>
+        </member>
+        <member name="P:Resources.Global.FromDate">
+            <summary>
+              Looks up a localized string similar to Date from.
+            </summary>
+        </member>
+        <member name="P:Resources.Global.More">
+            <summary>
+              Looks up a localized string similar to More.
+            </summary>
+        </member>
+        <member name="P:Resources.Global.None">
+            <summary>
+              Looks up a localized string similar to  .
+            </summary>
+        </member>
+        <member name="P:Resources.Global.Reset">
+            <summary>
+              Looks up a localized string similar to Reset.
+            </summary>
+        </member>
+        <member name="P:Resources.Global.Save">
+            <summary>
+              Looks up a localized string similar to Save.
+            </summary>
+        </member>
+        <member name="P:Resources.Global.Search">
+            <summary>
+              Looks up a localized string similar to Search.
+            </summary>
+        </member>
+        <member name="P:Resources.Global.Success_FileUpload">
+            <summary>
+              Looks up a localized string similar to The file was uploaded successfully.
+            </summary>
+        </member>
+        <member name="P:Resources.Global.ToDate">
+            <summary>
+              Looks up a localized string similar to Date to.
+            </summary>
+        </member>
+        <member name="P:Resources.Global.Upload">
+            <summary>
+              Looks up a localized string similar to Upload.
+            </summary>
+        </member>
+        <member name="T:Resources.SiteMap">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Resources.SiteMap.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Resources.SiteMap.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Resources.SiteMap.Add">
+            <summary>
+              Looks up a localized string similar to Add.
+            </summary>
+        </member>
+        <member name="P:Resources.SiteMap.Advertisers">
+            <summary>
+              Looks up a localized string similar to Advertisers.
+            </summary>
+        </member>
+        <member name="P:Resources.SiteMap.Campaigns">
+            <summary>
+              Looks up a localized string similar to Campaigns.
+            </summary>
+        </member>
+        <member name="P:Resources.SiteMap.Contents">
+            <summary>
+              Looks up a localized string similar to Contents.
+            </summary>
+        </member>
+        <member name="P:Resources.SiteMap.Publishers">
+            <summary>
+              Looks up a localized string similar to Publishers.
+            </summary>
+        </member>
+        <member name="P:Resources.SiteMap.Search">
+            <summary>
+              Looks up a localized string similar to Search.
+            </summary>
+        </member>
+        <member name="P:Resources.SiteMap.Slots">
+            <summary>
+              Looks up a localized string similar to Slots.
             </summary>
         </member>
         <member name="M:AdsVenture.Presentation.ContentServer.ModelBinders.UtcDateTimeConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)">

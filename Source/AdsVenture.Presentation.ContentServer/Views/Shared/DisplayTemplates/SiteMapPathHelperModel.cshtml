@@ -3,9 +3,15 @@
 @using System.Linq
 @using MvcSiteMapProvider.Web.Html.Models
 
-<ol class="breadcrumb">
-    @foreach (var node in Model)
+@{
+    var nodes = Model.Skip(1);
+    if (nodes.Any())
     {
-        <li class="@(node.IsCurrentNode ? "active" : "")">@Html.DisplayFor(m => node)</li>
+        <ol class="breadcrumb">
+            @foreach (var node in Model.Skip(1))
+            {
+                <li class="@(node.IsCurrentNode ? "active" : "")">@Html.DisplayFor(m => node)</li>
+            }
+        </ol>
     }
-</ol>
+}

@@ -207,10 +207,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_GlobalResources\DataTables.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataTables.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_GlobalResources\Global.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Global.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\SiteMap.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SiteMap.resx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\DependenciesConfig.cs" />
@@ -284,9 +294,27 @@
     <Content Include="Scripts\Plugins\jquery.isScreenVisible.js" />
     <Content Include="Scripts\Plugins\loading.js" />
     <Content Include="Scripts\Plugins\serialize-object.js" />
-    <Content Include="Scripts\Plugins\thousandsSeparator.js" />
     <Content Include="Scripts\ThirdParty\bootstrap.js" />
+    <Content Include="Scripts\ThirdParty\history.js" />
     <Content Include="Scripts\ThirdParty\jquery-2.1.1.js" />
+    <Content Include="Scripts\ThirdParty\jquery.dataTables\jquery.dataTables.js" />
+    <Content Include="Scripts\ThirdParty\jquery.dataTables\plugin.filteringDelay.js" />
+    <Content Include="Scripts\ThirdParty\jquery.dataTables\plugin.fixedHeader.js" />
+    <Content Include="Scripts\ThirdParty\jquery.dataTables\plugin.pagination.bootstrap.js" />
+    <Content Include="Scripts\ThirdParty\jquery.dataTables\plugin.reloadAjax.js" />
+    <Content Include="Scripts\ThirdParty\jquery.dataTables\plugin.sorting.dataValue.js" />
+    <Content Include="Scripts\ThirdParty\jquery.dataTables\plugin.sorting.globalize.js" />
+    <Content Include="Scripts\ThirdParty\jquery.dataTables\plugin.sorting.numbersWithHtml.js" />
+    <Content Include="Scripts\ThirdParty\jquery.dataTables\plugin.typeDetection.js" />
+    <Content Include="Scripts\ThirdParty\jquery.dataTables\plugin.typeDetection.numbersWithHtml.js" />
+    <Content Include="Scripts\ThirdParty\jquery.globalize.culture.es.js" />
+    <Content Include="Scripts\ThirdParty\jquery.globalize.js" />
+    <Content Include="Scripts\ThirdParty\jquery.mustache.js" />
+    <Content Include="Scripts\ThirdParty\jquery.numeric.js" />
+    <Content Include="Scripts\ThirdParty\jquery.select2.js" />
+    <Content Include="Scripts\ThirdParty\jquery.validate.js" />
+    <Content Include="Scripts\ThirdParty\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\ThirdParty\mustache.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -388,6 +416,18 @@
     <TypeScriptCompile Include="Scripts\Views\Advertisers\Index.ts" />
     <TypeScriptCompile Include="Scripts\Views\BaseView.ts" />
     <TypeScriptCompile Include="Scripts\Views\ModalView.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\DataTables.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>DataTables.Designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\SiteMap.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>SiteMap.Designer.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,21 +1,79 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>@ViewBag.Title</title>
+
     @Styles.Render("~/Content/css/site")
+
+    <!--[if lt IE 9]>
+        <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 </head>
 <body>
 
-    @Html.MvcSiteMap().SiteMapPath()
     @Html.MvcSiteMap().Menu()
+    @Html.MvcSiteMap().SiteMapPath()
 
     <div class="container body-content">
         @RenderBody()
     </div>
 
+    @RenderSection("modals", required: false)
+
+    @******* SCRIPTS *******@
+
     @Scripts.Render("~/bundles/site")
+    <script>
+    var Resources = {
+        DataTables: {
+            "sProcessing":     "@Html.Raw(Resources.DataTables.Processing)",
+            "sLengthMenu":     "@Html.Raw(Resources.DataTables.LengthMenu)",
+            "sZeroRecords":    "@Html.Raw(Resources.DataTables.ZeroRecords)",
+            "sEmptyTable":     "@Html.Raw(Resources.DataTables.EmptyTable)",
+            "sInfo":           "@Html.Raw(Resources.DataTables.Info)",
+            "sInfoEmpty":      "@Html.Raw(Resources.DataTables.InfoEmpty)",
+            "sInfoFiltered":   "@Html.Raw(Resources.DataTables.InfoFiltered)",
+            "sSearch":         "@Html.Raw(Resources.DataTables.Search)",
+            "sInfoThousands":  "@Html.Raw(Resources.DataTables.InfoThousands)",
+            "sLoadingRecords": "@Html.Raw(Resources.DataTables.LoadingRecords)",
+            "oPaginate": {
+                "sFirst":    "@Html.Raw(Resources.DataTables.Paginate_First)",
+                "sLast":     "@Html.Raw(Resources.DataTables.Paginate_Last)",
+                "sNext":     "@Html.Raw(Resources.DataTables.Paginate_Next)",
+                "sPrevious": "@Html.Raw(Resources.DataTables.Paginate_Previous)"
+            },
+            "oAria": {
+                "sSortAscending":  "@Html.Raw(Resources.DataTables.Aria_SortAscending)",
+                "sSortDescending": "@Html.Raw(Resources.DataTables.Aria_SortDescending)"
+            }
+        },
+        Success_Add: "@Html.Raw(AdsVenture.Commons.Resources.Shared.Success_Add)",
+        Success_Delete: "@Html.Raw(AdsVenture.Commons.Resources.Shared.Success_Delete)",
+        Success_Update: "@Html.Raw(AdsVenture.Commons.Resources.Shared.Success_Update)",
+        Error_Undefined: "@Html.Raw(AdsVenture.Commons.Resources.Shared.Error_Undefined)",
+        Error_Forbidden: "@Html.Raw(AdsVenture.Core.Resources.BusinessExceptions.UnauthorizedException)",
+        Error_MustSelectAnyItem: "@Html.Raw(AdsVenture.Commons.Resources.Shared.Error_MustSelectAnyItem)"
+    };
+    var app = new App(
+        $.extend(
+            @Html.Json(Html.Config()), {
+                baseUrl: "@Url.Content("/")",
+                previousUrl: "@Url.PreviousLocal()",
+                lang: "en",
+                numbersFormat: {
+                    currencyDecimals: "@DecimalFormatExtensions.CurrentFormatInfo.CurrencyDecimalDigits",
+                    accurateDecimals: "@DecimalFormatExtensions.AccurateDecimals",
+                    minDecimalsAfterSep: "@DecimalFormatExtensions.MinDecimalsAfterSeparator",
+                    decimalSep: "@DecimalFormatExtensions.CurrentFormatInfo.NumberDecimalSeparator"
+                }
+            }
+        )
+    );
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

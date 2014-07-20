@@ -117,82 +117,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Accept" xml:space="preserve">
-    <value>Accept</value>
+  <data name="Aria_SortAscending" xml:space="preserve">
+    <value>: activate to sort column ascending</value>
   </data>
-  <data name="Add" xml:space="preserve">
-    <value>Add</value>
+  <data name="Aria_SortDescending" xml:space="preserve">
+    <value>: activate to sort column descending</value>
   </data>
-  <data name="AddFile" xml:space="preserve">
-    <value>Add file</value>
+  <data name="EmptyTable" xml:space="preserve">
+    <value>No data available in table</value>
   </data>
-  <data name="AdvancedSearch" xml:space="preserve">
-    <value>Advanced search</value>
+  <data name="Info" xml:space="preserve">
+    <value>_START_ to _END_ from _TOTAL_ results</value>
   </data>
-  <data name="AppName" xml:space="preserve">
-    <value>PLG</value>
+  <data name="InfoEmpty" xml:space="preserve">
+    <value>0 entries</value>
   </data>
-  <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+  <data name="InfoFiltered" xml:space="preserve">
+    <value>(filtered from _MAX_ total entries)</value>
   </data>
-  <data name="Category" xml:space="preserve">
-    <value>Category</value>
+  <data name="InfoThousands" xml:space="preserve">
+    <value>,</value>
   </data>
-  <data name="ConfirmQuestion_DeleteMassive" xml:space="preserve">
-    <value>The following items will be removed from database:</value>
+  <data name="LengthMenu" xml:space="preserve">
+    <value>_MENU_ Results per page</value>
   </data>
-  <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
+  <data name="LoadingRecords" xml:space="preserve">
+    <value>Loading...</value>
   </data>
-  <data name="DeleteFiles" xml:space="preserve">
-    <value>Delete files</value>
+  <data name="Paginate_First" xml:space="preserve">
+    <value>First</value>
   </data>
-  <data name="DownloadFile" xml:space="preserve">
-    <value>Download file</value>
+  <data name="Paginate_Last" xml:space="preserve">
+    <value>Last</value>
   </data>
-  <data name="Error_RequiredFile" xml:space="preserve">
-    <value>You must upload a file</value>
+  <data name="Paginate_Next" xml:space="preserve">
+    <value>&amp;rsaquo;</value>
   </data>
-  <data name="File" xml:space="preserve">
-    <value>File</value>
+  <data name="Paginate_Previous" xml:space="preserve">
+    <value>&amp;lsaquo;</value>
   </data>
-  <data name="FileName" xml:space="preserve">
-    <value>File Name</value>
-  </data>
-  <data name="FileUpload_Button" xml:space="preserve">
-    <value>select the file from your computer</value>
-  </data>
-  <data name="FileUpload_Button_NoDroppable" xml:space="preserve">
-    <value>To attach the file select the file from your computer</value>
-  </data>
-  <data name="FileUpload_Drop" xml:space="preserve">
-    <value>To attach the file drag &amp; drop here or</value>
-  </data>
-  <data name="FromDate" xml:space="preserve">
-    <value>Date from</value>
-  </data>
-  <data name="More" xml:space="preserve">
-    <value>More</value>
-  </data>
-  <data name="None" xml:space="preserve">
-    <value> </value>
-  </data>
-  <data name="Reset" xml:space="preserve">
-    <value>Reset</value>
-  </data>
-  <data name="Save" xml:space="preserve">
-    <value>Save</value>
+  <data name="Processing" xml:space="preserve">
+    <value>Processing...</value>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>Search</value>
+    <value />
   </data>
-  <data name="Success_FileUpload" xml:space="preserve">
-    <value>The file was uploaded successfully</value>
-  </data>
-  <data name="ToDate" xml:space="preserve">
-    <value>Date to</value>
-  </data>
-  <data name="Upload" xml:space="preserve">
-    <value>Upload</value>
+  <data name="ZeroRecords" xml:space="preserve">
+    <value>No matching records found</value>
   </data>
 </root>
