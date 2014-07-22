@@ -22,7 +22,7 @@ namespace AdsVenture.Presentation.ContentServer
                 "~/Scripts/ThirdParty/jquery.validate.unobtrusive.js",
                 "~/Scripts/ThirdParty/jquery.dataTables/jquery.dataTables.js",
                 "~/Scripts/ThirdParty/jquery.dataTables/plugin.filteringDelay.js",
-                "~/Scripts/ThirdParty/jquery.dataTables/plugin.pagination.bootstrap.js",
+                "~/Scripts/ThirdParty/jquery.dataTables/plugin.bootstrap.js",
                 "~/Scripts/ThirdParty/jquery.dataTables/plugin.reloadAjax.js",
                 "~/Scripts/ThirdParty/jquery.dataTables/plugin.sorting.numbersWithHtml.js",
                 "~/Scripts/ThirdParty/jquery.dataTables/plugin.typeDetection.js",
@@ -52,12 +52,15 @@ namespace AdsVenture.Presentation.ContentServer
                 "~/Scripts/App.js",
                 "~/Scripts/Views/BaseView.js",
                 "~/Scripts/Views/ModalView.js",
+                "~/Scripts/Views/Shared/ConfirmMassiveActionModal.js",
+                "~/Scripts/Views/Shared/ChainedCheckboxList.js",
                 "~/Scripts/Views/Advertisers/Index.js"
             ));
 
             bundles.Add(new StyleBundle("~/Content/css/site").Include(
                 "~/Content/css/bootstrap.css",
                 "~/Content/css/bootstrap-theme.css",
+                "~/Content/css/dataTables.bootstrap.css",
                 "~/Content/css/site.css"
             ));
         }

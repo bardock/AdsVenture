@@ -1,7 +1,4 @@
-﻿@using AdsVenture.Core.Helpers.Extensions.Entities
-@using AdsVenture.Commons.Entities.Resources
-
-@model IEnumerable<Advertiser>
+﻿@model IEnumerable<Advertiser>
 
 @{
     Layout = null;
@@ -16,20 +13,11 @@
            <th data-sort-field="@HtmlItem.DisplayLiteral((m) => m.ID)">
                @HtmlItem.DisplayNameFor((m) => m.ID)
            </th>
-           <th data-sort-field="@HtmlItem.DisplayLiteral((m) => m.Description)">
-               @Entities.MediaGroup
-            </th>
-            <th data-sort-field="@HtmlItem.DisplayLiteral((m) => m.Category.Description)">
-                @Entities.Category
-            </th>
-            <th data-sort-field="@HtmlItem.DisplayLiteral((m) => m.CreatedBy.Name)">
-                @Resources.Global.UploadedBy
+           <th data-sort-field="@HtmlItem.DisplayLiteral((m) => m.Name)">
+               @HtmlItem.DisplayNameFor((m) => m.Name)
             </th>
             <th data-sort-field="@HtmlItem.DisplayLiteral((m) => m.CreatedOn)">
-                @Resources.Global.UploadDate
-            </th>
-            <th data-sort-field="@HtmlItem.DisplayLiteral((m) => m.LineColor)">
-               @Resources.Global.LineColor
+               @HtmlItem.DisplayNameFor((m) => m.CreatedOn)
             </th>
         </tr>
     </thead>
@@ -42,21 +30,16 @@
                     <input type="checkbox" name="check-id" value="@m.ID">
                 </td>
                 <td>
-                    <a href="javascript:void(0)" title="Open" onclick="view.edit.show(@m.ID)">
+                    <a href="@Url.Action("edit", new { id = m.ID })">
                         @m.ID
                     </a>
                 </td>
                 <td>
-                    <span data-descriptor-field="@HtmlItem.DisplayLiteral(x => x.Description)">
-                        @m.Description
+                    <span data-descriptor-field="@HtmlItem.DisplayLiteral(x => x.Name)">
+                        @m.Name
                     </span>
                 </td>
-                <td>@m.Category.Description</td>
-                <td>@m.CreatedBy.Name</td>
                 <td>@m.CreatedOn.Format()</td>
-                <td class="td_min linecolor">
-                    <span style="background-color:@m.LineColor;"></span>
-                </td>
             </tr>
         }
     </tbody>

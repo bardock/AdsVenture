@@ -3,29 +3,21 @@
 @using AdsVenture.Presentation.ContentServer.Controllers
 @using AdsVenture.Commons.Entities.Resources
 
-<h1>Search</h1>
-<p>asd asodiap odiasd asd asd asodiap odiasd asdasd asodiap odiasd asdasd asodiap odiasd asdasd asodiap odiasd asdasd asodiap odiasd asdasd asodiap odiasd asdasd asodiap odiasd asdasd asodiap odiasd asdasd asodiap odiasd asdasd asodiap odiasd asdasd asodiap odiasd asdasd asodiap odiasd asdasd asodiap odiasd asdasd asodiap odiasd asd</p>
-@*@using AdsVenture.Presentation.ContentServer.Models.Advertisers;
-
 @{
-    ViewBag.IsExcelExportable = false;
-    ViewBag.IsPdfExportable = false;
-    var HtmlMediaGroup = Html.ToModel<AdsVenture.Commons.Entities.Advertiser>();
+    var HtmlAdvertiser = Html.ToModel<AdsVenture.Commons.Entities.Advertiser>();
 }
 
+<div >
 
-<div class="row-fluid">
-    <div class="span12 tbl_first_min">
+    <div>
         @Html.Partial("Index_Table", new List<Advertiser>())
     </div>
 
-    <!--toolbar-->
     <footer class="footer_actions">
-        <input type="button" class="btn btn-primary" value="@Resources.Global.Add"
-               onclick="view.add.show()">
+        <a class="btn btn-primary">@Resources.Global.Add</a>
         <input type="button" class="btn" value="@Resources.Global.Delete" onclick="view.delete.show()">
     </footer>
-    <!--end toolbar-->
+
 </div>
 
 @section modals {
@@ -38,19 +30,14 @@
         OnConfirm = "view.deleteMassive()"
     })
     <script id="delete-items-template" type="text/html">
-        <ul>{{#.}}<li>{{@HtmlMediaGroup.DisplayLiteral(x => x.Description)}}</li>{{/.}}</ul>
+        <ul>{{#.}}<li>{{@HtmlAdvertiser.DisplayLiteral(x => x.Name)}}</li>{{/.}}</ul>
     </script>
-
-    @Html.Partial("~/Views/Advertisers/FormModal.cshtml", new FormModal() { ID = "addModal", SubmitUrl = Url.Action("Add") })
-    @Html.Partial("~/Views/Advertisers/FormModal.cshtml", new FormModal() { ID = "editModal", SubmitUrl = Url.Action("Edit"), IsEdit = true })
 }
 
 @section scripts{
     <script>
-        @*Resources.Error_RequiredFile = "@Html.Raw(Resources.Global.Error_RequiredFile)";*@
-
-        @*view = new Views.Advertisers.Index(
+        view = new Views.Advertisers.Index(
             "@Html.Raw(Url.Action2("Index_Table", null))"
         );
     </script>
-}*@
+}

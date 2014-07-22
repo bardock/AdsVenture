@@ -1,4 +1,5 @@
-﻿using AdsVenture.Commons.Entities.Interfaces;
+﻿using AdsVenture.Commons.Entities.DataAnotations;
+using AdsVenture.Commons.Entities.Interfaces;
 using System;
 using System.ComponentModel.DataAnnotations;
 

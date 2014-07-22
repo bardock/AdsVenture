@@ -19,7 +19,19 @@ var Views;
                     html: true,
                     pageLength: 25
                 });
+                this.delete = new Views.Shared.ConfirmMassiveActionModal("#modal_deleteMassive", "delete-items-template", this.dataTable, this.notifications);
             }
+            Index.prototype.deleteMassive = function () {
+                var _this = this;
+                this.api.delete("Advertisers", {
+                    action: "DeleteMassive",
+                    data: { IDs: this.dataTable.getCheckedIds() },
+                    success: function () {
+                        _this.notifications.clear().showSuccess(Resources.Success_Delete);
+                        _this.dataTable.fnReloadAjax(null, null, true);
+                    }
+                });
+            };
             return Index;
         })(Views.BaseView);
         Advertisers.Index = Index;

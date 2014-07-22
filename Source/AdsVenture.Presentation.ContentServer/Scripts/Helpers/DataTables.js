@@ -97,7 +97,6 @@ var DataTables;
                 "bProcessing": opts.showProcessing,
                 "bFilter": opts.filter,
                 "bLengthChange": true,
-                "sPaginationType": "bootstrap",
                 "bInfo": opts.paginate,
                 "bAutoWidth": false,
                 "fnDrawCallback": function (oSettings) {
@@ -163,7 +162,7 @@ var DataTables;
                     });
                     $("[name=check-id]", container).change(function () {
                         if ($(this).is(":checked") == false)
-                            $(".checkall", container).attr("checked", false);
+                            $(".checkall", container).prop("checked", false);
                         else
                             DataTables.updateCheckAll(container);
                     });
@@ -172,7 +171,7 @@ var DataTables;
 
                     // init and bind single select
                     for (var i = 0; i < opts.checkedIds.length; i++) {
-                        $(":radio[name=check-id][value=" + opts.checkedIds[i] + "]", container).attr("checked", true);
+                        $(":radio[name=check-id][value=" + opts.checkedIds[i] + "]", container).prop("checked", true);
                     }
                     if (opts.onCheck)
                         $(":radio[name=check-id]", container).change(function () {
@@ -195,11 +194,6 @@ var DataTables;
                         }
                     }
                 },
-                "sDom": "<"
-                    + (opts.filter ? "'row-fluid'<'span12'f>" : "")
-                    + "r><'responsive_scroll't>"
-                    + (opts.paginate ? "<'row-fluid'<'span4'l><'span3'i><'span5'p>" : "")
-                    + ">",
                 "aaSorting": aaSorting,
                 "oLanguage": Resources.DataTables,
                 "aLengthMenu": [5, 10, 25, 50, 100]
@@ -233,7 +227,7 @@ var DataTables;
         },
         updateCheckAll: function (selector) {
             var checks = $("[name=check-id]:not(:disabled)", selector);
-            $(".checkall", selector).attr(
+            $(".checkall", selector).prop(
                 "checked",
                 checks.size() > 0 && checks.is(":not(:checked)") == false
             );
@@ -377,7 +371,7 @@ var DataTables;
     $.fn.dataTableExt.oApi.checkAll = function (oSettings, check, container) {
         container = container || this.getTableAndNodes();
         $(".checkall,[name=check-id]:not(:disabled)", container)
-            .attr("checked", check !== false);
+            .prop("checked", check !== false);
         return this;
     }
     $.fn.dataTableExt.oApi.uncheckAll = function () {
@@ -387,7 +381,7 @@ var DataTables;
         var check = $("[name=check-id][value=" + id + "]:not(:disabled)", this.getTableAndNodes());
         if (check.is(":radio") && check !== false)
             this.uncheckAll();
-        check.attr("checked", check !== false);
+        check.prop("checked", check !== false);
         return this;
     }
     $.fn.dataTableExt.oApi.getCheckedIds = function () {

@@ -229,6 +229,7 @@
     <Compile Include="App_Start\ModelBindersConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Api\AdvertisersController.cs" />
     <Compile Include="Controllers\Api\ContentController.cs" />
     <Compile Include="Controllers\AdvertisersController.cs" />
     <Compile Include="Controllers\ContentReferenceController.cs" />
@@ -247,6 +248,7 @@
     </Compile>
     <Compile Include="Helpers\ConfigSection.cs" />
     <Compile Include="Helpers\ConfigViews.cs" />
+    <Compile Include="Helpers\Extensions\DisplayEntityNameExtensions.cs" />
     <Compile Include="Helpers\Extensions\HttpActionDescriptorExtensions.cs" />
     <Compile Include="Helpers\Extensions\NotificationExtensions.cs" />
     <Compile Include="Helpers\Files\ApiFileReader.cs" />
@@ -264,6 +266,7 @@
     <Compile Include="Models\Shared\ConfirmModal.cs" />
     <Compile Include="Models\Shared\DatePicker.cs" />
     <Compile Include="Models\Shared\FileUpload.cs" />
+    <Compile Include="Models\Shared\MassiveParams.cs" />
     <Compile Include="Models\Shared\ShortListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -271,7 +274,14 @@
     <Content Include="App_Data\XmlDocument.xml" />
     <Content Include="Content\css\bootstrap-theme.css" />
     <Content Include="Content\css\bootstrap.css" />
-    <Content Include="Content\css\site.css" />
+    <Content Include="Content\css\dataTables.bootstrap.css" />
+    <Content Include="Content\css\site.css.map">
+      <DependentUpon>site.css</DependentUpon>
+    </Content>
+    <None Include="Content\css\site.less" />
+    <Content Include="Content\css\site.css">
+      <DependentUpon>site.less</DependentUpon>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -298,6 +308,7 @@
     <Content Include="Scripts\ThirdParty\history.js" />
     <Content Include="Scripts\ThirdParty\jquery-2.1.1.js" />
     <Content Include="Scripts\ThirdParty\jquery.dataTables\jquery.dataTables.js" />
+    <Content Include="Scripts\ThirdParty\jquery.dataTables\plugin.bootstrap.js" />
     <Content Include="Scripts\ThirdParty\jquery.dataTables\plugin.filteringDelay.js" />
     <Content Include="Scripts\ThirdParty\jquery.dataTables\plugin.fixedHeader.js" />
     <Content Include="Scripts\ThirdParty\jquery.dataTables\plugin.pagination.bootstrap.js" />
@@ -315,6 +326,8 @@
     <Content Include="Scripts\ThirdParty\jquery.validate.js" />
     <Content Include="Scripts\ThirdParty\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\ThirdParty\mustache.js" />
+    <Content Include="Scripts\Views\Shared\ChainedCheckboxList.js" />
+    <Content Include="Scripts\Views\Shared\ConfirmMassiveActionModal.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -351,6 +364,7 @@
     <Content Include="Views\Shared\DisplayTemplates\MetaRobotsHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
+    <Content Include="Views\Shared\_ConfirmModal.cshtml" />
     <None Include="Web.ConnectionStrings.config">
       <SubType>Designer</SubType>
     </None>
@@ -416,6 +430,8 @@
     <TypeScriptCompile Include="Scripts\Views\Advertisers\Index.ts" />
     <TypeScriptCompile Include="Scripts\Views\BaseView.ts" />
     <TypeScriptCompile Include="Scripts\Views\ModalView.ts" />
+    <TypeScriptCompile Include="Scripts\Views\Shared\ChainedCheckboxList.ts" />
+    <TypeScriptCompile Include="Scripts\Views\Shared\ConfirmMassiveActionModal.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\DataTables.resx">
