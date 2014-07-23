@@ -19,20 +19,5 @@ namespace AdsVenture.Presentation.ContentServer.Helpers
         {
             return htmlHelper.Partial("~/Views/Shared/_ConfirmModal.cshtml", model);
         }
-
-        public static System.Web.Mvc.MvcHtmlString Partial_NavigationBreadcrum(
-            this System.Web.Mvc.HtmlHelper htmlHelper)
-        {
-            return htmlHelper.Partial(
-                "~/Views/Shared/_NavigationBreadcrum.cshtml", 
-                (Stack<BreadcrumNode>)SiteMapManager.GetBreadcrumNodes(htmlHelper.ViewBag.CurrentNodeTitle));
-        }
-
-        public static System.Web.Mvc.MvcHtmlString Partial_NavigationPills(
-            this System.Web.Mvc.HtmlHelper htmlHelper, 
-            IEnumerable<BreadcrumNode> model)
-        {
-            return htmlHelper.Partial("~/Views/Shared/_NavigationPills.cshtml", model);
-        }
     }
 }

@@ -262,7 +262,7 @@
     <Compile Include="Helpers\Mvc\ModelBinders\DefaultValueModelBinder.cs" />
     <Compile Include="Helpers\ShortListHelper.cs" />
     <Compile Include="Helpers\SiteHtmlHelper.cs" />
-    <Compile Include="Helpers\SiteMapManager.cs" />
+    <Compile Include="Helpers\Extensions\SiteMapExtensions.cs" />
     <Compile Include="Helpers\SiteUrls.cs" />
     <Compile Include="Helpers\SiteViews.cs" />
     <Compile Include="Helpers\WebViewPageExtensions.cs" />
@@ -366,7 +366,6 @@
     <Content Include="Views\ContentReference\SampleFluidExternal.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_DatePicker.cshtml" />
-    <Content Include="Views\Shared\_NavigationBreadcrum.cshtml" />
     <Content Include="Views\Shared\_NavigationMenu.cshtml" />
     <Content Include="Views\Error\403.cshtml" />
     <Content Include="Views\Error\404.cshtml" />
