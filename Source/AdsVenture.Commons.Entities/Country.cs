@@ -9,6 +9,11 @@ namespace AdsVenture.Commons.Entities
     [DataContract]
     public class Country : IEntity
     {
+        public enum Options
+        {
+            Argentina = 1
+        }
+
         [DataMember]
         public short ID { get; set; }
 

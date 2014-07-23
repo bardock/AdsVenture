@@ -1,6 +1,7 @@
 ﻿using AdsVenture.Commons.Pagination;
 using AdsVenture.Core.Managers;
 using Bardock.Utils.Extensions;
+using Bardock.Utils.Web.Mvc.HtmlTags;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,14 @@ namespace AdsVenture.Presentation.ContentServer.Controllers
     public class AdvertisersController : _BaseController
     {
         private readonly AdvertiserManager _manager;
+        private readonly CountryManager _countryManager;
 
-        public AdvertisersController(AdvertiserManager mediagroupmanager)
+        public AdvertisersController(
+            AdvertiserManager mediagroupmanager, 
+            CountryManager countryManager)
         {
             this._manager = mediagroupmanager;
+            this._countryManager = countryManager;
         }
 
         public ActionResult Index()
@@ -32,6 +37,16 @@ namespace AdsVenture.Presentation.ContentServer.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult Add()
+        {
+            var model = new Models.Advertisers.Form() 
+            {
+                IsNew = true,
+                CountryOptions = OptionsList.Create(_countryManager.FindAll(), display: x => x.Description, value: x => x.ID)
+            };
+            return View("Form", model);
+        }
+
         [HttpPost]
         public ActionResult Add(Core.DTO.AdvertiserCreate data)
         {
@@ -39,6 +54,7 @@ namespace AdsVenture.Presentation.ContentServer.Controllers
             {
                 _manager.Create(data);
                 Notifications.AddSuccess(Commons.Resources.Shared.Success_Add);
+                return RedirectToControllerHome();
             }
             catch (Core.Exceptions.BusinessUserException ex)
             {
@@ -48,7 +64,7 @@ namespace AdsVenture.Presentation.ContentServer.Controllers
             {
                 Notifications.AddError(Commons.Resources.Shared.Error_Undefined);
             }
-            return RedirectToControllerHome();
+            return Add();
         }
 
         [HttpPost]

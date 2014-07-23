@@ -72,6 +72,7 @@ namespace AdsVenture.Core.Managers
             ValidateCreate(data);
 
             var e = Mapper.Map<Advertiser>(data);
+            e.ID = Guid.NewGuid();
             e.CreatedOn = DateTime.UtcNow;
             //e.CreatedByID = UserId;
 

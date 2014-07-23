@@ -118,6 +118,7 @@
     <Compile Include="Extensions\Entities\ICountryNavigatorExtensions.cs" />
     <Compile Include="Helpers\UnitOfWork.cs" />
     <Compile Include="Managers\AdvertiserManager.cs" />
+    <Compile Include="Managers\CountryManager.cs" />
     <Compile Include="Managers\IManager.cs" />
     <Compile Include="Managers\ContentManager.cs" />
     <Compile Include="Managers\UserManager.cs" />

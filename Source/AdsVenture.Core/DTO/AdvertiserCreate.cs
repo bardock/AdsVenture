@@ -7,7 +7,5 @@ namespace AdsVenture.Core.DTO
         public string Name { get; set; }
 
         public short CountryID { get; set; }
-
-        public bool Active { get; set; }
     }
 }
