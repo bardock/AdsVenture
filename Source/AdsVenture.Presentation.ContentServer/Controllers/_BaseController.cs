@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using System.Web.SessionState;
 using Bardock.Utils.Web.Mvc;
+using AdsVenture.Commons.Pagination;
 
 namespace AdsVenture.Presentation.ContentServer.Controllers
 {
@@ -17,6 +18,15 @@ namespace AdsVenture.Presentation.ContentServer.Controllers
         protected virtual void ThrowHttpNotFound()
         {
             throw new HttpException(404, "NotFound");
+        }
+
+        public ActionResult TablePage<T>(PageData<T> page, string viewName = "Index_Table")
+        {
+            return Json(new
+            {
+                Html = RenderViewToString(viewName, page.Data),
+                TotalRecords = page.TotalRecords
+            }, JsonRequestBehavior.AllowGet);
         }
 	}
 }

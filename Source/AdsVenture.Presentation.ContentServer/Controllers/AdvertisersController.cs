@@ -31,12 +31,7 @@ namespace AdsVenture.Presentation.ContentServer.Controllers
 
         public ActionResult Index_Table(PageParams pageParams)
         {
-            var page = _manager.FindAll(pageParams);
-            return Json(new
-            {
-                Html = RenderViewToString("Index_Table", page.Data),
-                TotalRecords = page.TotalRecords
-            }, JsonRequestBehavior.AllowGet);
+            return TablePage(_manager.FindAll(pageParams));
         }
 
         public ActionResult Add()
