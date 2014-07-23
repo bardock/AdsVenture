@@ -11,12 +11,12 @@
     }
 
     <div class="form-group">
-        <label for="@HtmlEntity.IdFor(m => m.Name)">@HtmlEntity.DisplayEntityNameFor(m => m.Name)</label>
+        <label for="@HtmlEntity.IdFor(m => m.Name)" class="control-label">@HtmlEntity.DisplayEntityNameFor(m => m.Name)</label>
         @HtmlEntity.Tags().TextBoxFor(m => m.Name).AddClass("form-control")
     </div>
 
     <div class="form-group">
-        <label for="@HtmlEntity.IdFor(m => m.CountryID)">@HtmlEntity.DisplayEntityNameFor(m => m.Country)</label>
+        <label for="@HtmlEntity.IdFor(m => m.CountryID)" class="control-label">@HtmlEntity.DisplayEntityNameFor(m => m.Country)</label>
         @(HtmlEntity.Tags().SelectFor(
                 m => m.CountryID,
                 Model.CountryOptions,

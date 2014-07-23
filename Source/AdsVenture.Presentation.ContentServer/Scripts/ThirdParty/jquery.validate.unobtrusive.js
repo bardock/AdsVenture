@@ -13,7 +13,8 @@
 
     var settings = {
         fieldValidationErrorClass: "error",
-        inputValidationErrorClass: "error"
+        inputValidationErrorClass: "error",
+        formGroupValidationErrorClass: "has-error"
     };
 
     function setValidationValues(options, ruleName, value) {
@@ -58,7 +59,7 @@
             error.hide();
         }
 
-        $(inputElement).parents(".field-wrapper").removeClass("field-validation-valid").addClass(settings.fieldValidationErrorClass);
+        $(inputElement).closest(".form-group").removeClass("field-validation-valid").addClass(settings.formGroupValidationErrorClass);
     }
 
     function onErrors(event, validator) {  // 'this' is the form element
@@ -87,7 +88,7 @@
                 container.empty();
             }
         }
-        $(this).find(".field-wrapper").addClass("field-validation-valid").removeClass(settings.fieldValidationErrorClass);
+        $(this).find(".form-group").addClass("field-validation-valid").removeClass(settings.formGroupValidationErrorClass);
     }
 
     function onReset(event) {  // 'this' is the form element
@@ -102,6 +103,9 @@
             .removeData("unobtrusiveContainer")
             .find(">*")  // If we were using valmsg-replace, get the underlying error
                 .removeData("unobtrusiveContainer");
+        $form.find("." + settings.formGroupValidationErrorClass)
+            .addClass("field-validation-valid")
+            .removeClass(settings.formGroupValidationErrorClass)
     }
 
     function validationInfo(form) {

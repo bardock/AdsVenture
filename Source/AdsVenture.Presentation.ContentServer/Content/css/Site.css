@@ -18,7 +18,7 @@ textarea {
   color: #b94a48;
 }
 .field-validation-valid {
-  display: none;
+  /*display: none;*/
 }
 input.input-validation-error {
   border: 1px solid #b94a48;
