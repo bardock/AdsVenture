@@ -45,13 +45,7 @@ namespace AdsVenture.Presentation.ContentServer.Controllers
 
         private ActionResult GetAddView(Commons.Entities.Advertiser e = null)
         {
-            var model = new Models.Advertisers.Form()
-            {
-                IsNew = true,
-                CountryOptions = OptionsList.Create(_countryManager.FindAll(), display: x => x.Description, value: x => x.ID),
-                Entity = e
-            };
-            return View("Form", model);
+            return GetFormView(e, isNew: true);
         }
 
         [HttpPost]
@@ -74,6 +68,22 @@ namespace AdsVenture.Presentation.ContentServer.Controllers
             return GetAddView(Mapper.Map<Commons.Entities.Advertiser>(data));
         }
 
+        public ActionResult Edit(Guid id)
+        {
+            return GetEditView(id);
+        }
+
+        private ActionResult GetEditView(Guid id, Core.DTO.AdvertiserUpdate data = null)
+        {
+            var e = _manager.Find(id);
+
+            if(data != null)
+            { 
+                e = Mapper.Map(data, e);
+            }
+            return GetFormView(e);
+        }
+
         [HttpPost]
         public ActionResult Edit(Core.DTO.AdvertiserUpdate data)
         {
@@ -81,6 +91,7 @@ namespace AdsVenture.Presentation.ContentServer.Controllers
             {
                 _manager.Update(data);
                 Notifications.AddSuccess(Commons.Resources.Shared.Success_Update);
+                return RedirectToControllerHome();
             }
             catch (Core.Exceptions.BusinessUserException ex)
             {
@@ -90,7 +101,18 @@ namespace AdsVenture.Presentation.ContentServer.Controllers
             {
                 Notifications.AddError(Commons.Resources.Shared.Error_Undefined);
             }
-            return RedirectToControllerHome();
+            return GetEditView(data.ID, data);
+        }
+
+        private ActionResult GetFormView(Commons.Entities.Advertiser e = null, bool isNew = false)
+        {
+            var model = new Models.Advertisers.Form()
+            {
+                IsNew = isNew,
+                CountryOptions = OptionsList.Create(_countryManager.FindAll(), display: x => x.Description, value: x => x.ID),
+                Entity = e
+            };
+            return View("Form", model);
         }
     }
 }
