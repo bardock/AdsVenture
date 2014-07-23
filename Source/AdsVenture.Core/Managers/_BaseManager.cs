@@ -38,7 +38,7 @@ namespace AdsVenture.Core.Managers
 
         protected Bardock.Utils.Logger.ILog Log
         {
-            get { return Bardock.Utils.Logger.Manager.GetLog(this); }
+            get { return Bardock.Utils.Logger.LogManager.Default.GetLog(this); }
         }
 
         protected TransactionScope GetTransactionScope(DependentTransaction dtx = null, bool async = false)

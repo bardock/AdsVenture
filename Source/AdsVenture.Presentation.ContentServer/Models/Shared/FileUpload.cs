@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Mvc;
+﻿using HtmlTags;
 
 namespace AdsVenture.Presentation.ContentServer.Models.Shared
 {
@@ -11,7 +8,6 @@ namespace AdsVenture.Presentation.ContentServer.Models.Shared
         public string Url { get; set; }
         public string UrlFieldName { get; set; }
         public string IsEmptyFieldName { get; set; }
-        public Func<IDictionary<string, object>, MvcHtmlString> TextBoxBuilder { get; set; }
-
+        public HtmlTag TextBoxTag { get; set; }
     }
 }

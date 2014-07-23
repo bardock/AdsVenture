@@ -130,6 +130,6 @@ namespace AdsVenture.Core.Helpers
                 onComplete();
         }
 
-        public ILog Log { get { return Manager.GetLog(this); } }
+        public ILog Log { get { return LogManager.Default.GetLog(this); } }
     }
 }

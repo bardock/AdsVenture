@@ -31,8 +31,9 @@ namespace AdsVenture.Core
 
             InitMappings();
 
-            _isInitialized = true;
+            Bardock.Utils.Globalization.Resources.Register(new Bardock.Utils.Globalization.TypedClassResourceProvider(typeof(Commons.Entities.Resources.Entities)));
 
+            _isInitialized = true;
         }
 
         private static void InitValidation()

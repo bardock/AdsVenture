@@ -12,25 +12,28 @@ using System.Text;
 using Bardock.Utils.Extensions;
 using Bardock.Utils.Web.Mvc.Helpers;
 using Bardock.Utils.Web.Mvc.Extensions;
+using Bardock.Utils.Web.Mvc.HtmlTags.Extensions;
+using Bardock.Utils.Web.Mvc.HtmlTags;
+using HtmlTags;
 
 namespace AdsVenture.Presentation.ContentServer.Helpers
 {
     public static class SiteHtmlHelper
     {
-        public static MvcHtmlString DatePicker(this HtmlHelper htmlHelper, string name, System.DateTime? value = null, string inputClass = null, bool appendCalendarMode = true, bool disabled = false)
+        public static MvcHtmlString DatePicker(
+            this HtmlHelper htmlHelper, 
+            string name, 
+            DateTime? value = null, string inputClass = null, bool appendCalendarMode = true, bool disabled = false)
         {
             return htmlHelper.Partial("~/Views/Shared/_DatePicker.cshtml", new Models.Shared.DatePicker
             {
-                InputClass = inputClass,
                 AppendCalendarMode = appendCalendarMode,
                 Disabled = disabled,
-                //Build a custom textbox to avoid date format
-                //TODO: Create a custom textbox helper
-                TextBoxBuilder = (IDictionary<string, object> htmlAttributes) => { 
-                    return new MvcHtmlString(string.Format("<input type=\"text\" name=\"{0}\" value=\"{1}\" {2}>", 
-                        name, value.ApplyOrDefault(x => x.DateFormat()), 
-                        string.Join(" ", HtmlAttributeHelper.BuildAttrs(htmlAttributes, disabled: disabled)
-                            .Select(x => string.Format("{0}=\"{1}\"", x.Key, x.Value))))); }
+                TextBoxTag = htmlHelper.Tags()
+                    .TextBox(name)
+                    .AddClass("input-small " + inputClass)
+                    .Val(value.ApplyOrDefault(x => x.DateFormat()))
+                    .Disabled(disabled)
             });
         }
 
@@ -45,64 +48,60 @@ namespace AdsVenture.Presentation.ContentServer.Helpers
             DateTime? endDate = null)
         {
             System.DateTime? value = defaultValue;
-            if ((htmlHelper.ViewData.Model != null))
+            if (htmlHelper.ViewData.Model != null)
             {
                 value = expression.Compile().Invoke(htmlHelper.ViewData.Model);
             }
-
-            return htmlHelper.Partial("~/Views/Shared/_DatePicker.cshtml", new Models.Shared.DatePicker
+            var model = new Models.Shared.DatePicker
             {
-                InputClass = inputClass,
                 AppendCalendarMode = appendCalendarMode,
                 Disabled = disabled,
                 MinViewMode = minViewMode,
                 StartDate = startDate,
-                EndDate = endDate,
+                EndDate = endDate
+            };
+            if (expression.Body.NodeType == ExpressionType.Convert 
+                || expression.Body.NodeType == ExpressionType.ConvertChecked)
+            {
+                model.TextBoxTag = htmlHelper.Tags()
+                    .TextBoxFor(expression: (Expression<System.Func<TModel, System.DateTime>>)
+                            Bardock.Utils.Linq.Expressions.ExpressionHelper.RemoveConvert(expression));
+            }
+            else
+            {
+                model.TextBoxTag = htmlHelper.Tags().TextBoxFor(expression);
+            }
 
-                TextBoxBuilder = (IDictionary<string, object> htmlAttributes) =>
-                {
-                    htmlAttributes.Add("data-default-value", defaultValue.ApplyOrDefault(x => x.DateFormat()));
+            model.TextBoxTag
+                .AddClass("input-small " + inputClass)
+                .Data("default-value", defaultValue.ApplyOrDefault(x => x.DateFormat()))
+                .Val(value.ApplyOrDefault(x => x.DateFormat()))
+                .Disabled(disabled);
 
-                    if ((expression.Body.NodeType == ExpressionType.Convert || expression.Body.NodeType == ExpressionType.ConvertChecked))
-                    {
-                        return htmlHelper.TextBox2For(
-                            expression: (Expression<System.Func<TModel, System.DateTime>>)
-                                Bardock.Utils.Linq.Expressions.ExpressionHelper.RemoveConvert(expression), 
-                            htmlAttributes: htmlAttributes, 
-                            value: value.ApplyOrDefault(x => x.DateFormat()), 
-                            disabled: disabled);
-                    }
-                    else
-                    {
-                        return htmlHelper.TextBox2For(expression, htmlAttributes: htmlAttributes, value: value.ApplyOrDefault(x => x.DateFormat()), disabled: disabled);
-                    }
-                }
-            });
+            return htmlHelper.Partial("~/Views/Shared/_DatePicker.cshtml", model);
         }
 
-        public static MvcHtmlString Select2For<TModel, TProperty>(
-            this HtmlHelper<TModel> htmlHelper, 
+        public static HtmlTag Select2For<TModel, TProperty>(
+            this HtmlTagHelper<TModel> helper, 
             Expression<Func<TModel, TProperty>> expression,
-            IEnumerable<SelectListItem> selectList,
+            OptionsList<SelectListItem> options,
             int items = 10,
             bool allowClear = true,
             string placeHolder = null, 
             string optionLabel = null, 
-            IDictionary<string, object> htmlAttributes = null, 
-            bool disabled = false,
             string containerClass = "select2_content", 
             string unconstrainedElement = null,
             string customFilterCallback = null,
             string dropdownCssClass = null)
         {
-            htmlAttributes = GetSelect2HtmlAttributes(
-                items, allowClear, placeHolder, htmlAttributes, containerClass, unconstrainedElement, customFilterCallback, dropdownCssClass);
-
-            return htmlHelper.DropDownList2For(expression, selectList, optionLabel, htmlAttributes, disabled);
+            return helper
+                .SelectFor(expression, options)
+                .AddDefaultOption(optionLabel)
+                .ConfigSelect2(items, allowClear, placeHolder, containerClass, unconstrainedElement, customFilterCallback, dropdownCssClass);
         }
 
-        public static MvcHtmlString Select2For<TModel, TValueProp, TTextProp>(
-            this HtmlHelper<TModel> htmlHelper, 
+        public static HtmlTag Select2For<TModel, TValueProp, TTextProp>(
+            this HtmlTagHelper<TModel> helper, 
             Expression<System.Func<TModel, TValueProp>> valueExpression, 
             Expression<System.Func<TModel, TTextProp>> textExpression, 
             string action, 
@@ -110,7 +109,6 @@ namespace AdsVenture.Presentation.ContentServer.Helpers
             int items = 10, 
             bool allowClear = true, 
             string placeHolder = null, 
-            IDictionary<string, object> htmlAttributes = null, 
             bool disabled = false,
             string containerClass = "select2_content", 
             string unconstrainedElement = null, 
@@ -119,19 +117,17 @@ namespace AdsVenture.Presentation.ContentServer.Helpers
             //Get text from expression
             var text = string.Empty;
             try
-            {
-                text = textExpression.Compile().Invoke(htmlHelper.ViewData.Model).ToString();
-            }
-            catch (Exception)
-            {
-                //Ignore
-            }
-            return htmlHelper.Select2For(valueExpression, text, action, controller, items, allowClear, placeHolder, htmlAttributes, disabled, containerClass,
-            unconstrainedElement, customFilterCallback);
+            { text = textExpression.Compile().Invoke(helper.HtmlHelper.ViewData.Model).ToString(); }
+            catch (Exception) 
+            { /* Ignore */ }
+
+            return helper.Select2For(
+                valueExpression, text, action, controller, items, allowClear, 
+                placeHolder, disabled, containerClass, unconstrainedElement, customFilterCallback);
         }
 
-        public static MvcHtmlString Select2For<TModel, TValueProp>(
-            this HtmlHelper<TModel> htmlHelper, 
+        public static HtmlTag Select2For<TModel, TValueProp>(
+            this HtmlTagHelper<TModel> helper, 
             Expression<System.Func<TModel, TValueProp>> valueExpression, 
             string text, 
             string action, 
@@ -139,7 +135,6 @@ namespace AdsVenture.Presentation.ContentServer.Helpers
             int items = 10, 
             bool allowClear = true, 
             string placeHolder = null, 
-            IDictionary<string, object> htmlAttributes = null, 
             bool disabled = false, 
             string containerClass = "select2_content", 
             string unconstrainedElement = null, 
@@ -148,112 +143,92 @@ namespace AdsVenture.Presentation.ContentServer.Helpers
         {
             if (disabled)
             {
-                return htmlHelper.TextBox2("-", text, disabled: true);
-
+                return helper.TextBox("-").Val(text).Disabled(true);
             }
             else
             {
                 var name = Bardock.Utils.Linq.Expressions.ExpressionHelper.GetExpressionText(valueExpression);
 
-                htmlAttributes["data-dropdowncssclass"] = "drop_" + name;
-                htmlAttributes = GetSelect2HtmlAttributes(
-                    items, allowClear, placeHolder, htmlAttributes, containerClass, unconstrainedElement, customFilterCallback, dropdownCssClass);
-                htmlAttributes["data-source-action"] = action;
-                htmlAttributes["data-source-controller"] = controller;
-                htmlAttributes["data-text"] = text;
+                var hidden = helper
+                    .HiddenFor(valueExpression)
+                    .Data("dropdowncssclass", "drop_" + name)
+                    .ConfigSelect2(items, allowClear, placeHolder, containerClass, unconstrainedElement, customFilterCallback, dropdownCssClass)
+                    .Data("source-action", action)
+                    .Data("source-controller", controller)
+                    .Data("text", text);
 
-                var hidden = htmlHelper.HiddenFor(valueExpression, htmlAttributes);
-                var fakeContainer = "<div class=\"select2-container select2-fake\"><a class=\"select2-choice\"></a></div>";
+                var fakeContainer = new HtmlTag("div")
+                    .AddClasses("select2-container", "select2-fake")
+                    .Append(new HtmlTag("a").AddClass("select2-choice"));
 
-                var htmlBuilder = new StringBuilder();
-                htmlBuilder.AppendLine(fakeContainer).AppendLine(hidden.ToString());
-                return new MvcHtmlString(htmlBuilder.ToString());
+                return new NoTag().Append(fakeContainer).Append(hidden);
             }
         }
 
-        private static IDictionary<string, object> GetSelect2HtmlAttributes(
+        private static HtmlTag ConfigSelect2(
+            this HtmlTag tag,
             int items = 10,
             bool allowClear = true,
             string placeHolder = null,
-            IDictionary<string, object> htmlAttributes = null,
             string containerClass = "select2_content",
             string unconstrainedElement = null,
             string customFilterCallback = null,
             string dropdownCssClass = null)
         {
-            htmlAttributes = htmlAttributes ?? new Dictionary<string, object>();
-
-            htmlAttributes["data-provide"] = "select2";
-            htmlAttributes["data-items"] = items;
-            htmlAttributes["data-select2-container-class"] = containerClass;
-            if (!string.IsNullOrEmpty(dropdownCssClass))
-            {
-                htmlAttributes["data-dropdowncssclass"] = 
-                    htmlAttributes.ContainsKey("data-dropdowncssclass") 
-                    ? string.Concat(htmlAttributes["data-dropdowncssclass"], " ", dropdownCssClass) 
-                    : dropdownCssClass;
-            }
-
-            if (!string.IsNullOrWhiteSpace(placeHolder))
-            {
-                htmlAttributes["data-placeholder"] = placeHolder;
-            }
-
-            if (allowClear)
-            {
-                htmlAttributes["data-allow-clear"] = allowClear;
-            }
-
-            if (!string.IsNullOrWhiteSpace(unconstrainedElement))
-            {
-                htmlAttributes["data-unconstrained-element"] = unconstrainedElement;
-            }
-
-            if (!string.IsNullOrWhiteSpace(customFilterCallback))
-            {
-                htmlAttributes["data-custom-filter-callback"] = customFilterCallback;
-            }
-
-            return htmlAttributes;
+            return tag
+                .Data("provide", "select2")
+                .Data("items", items)
+                .Data("select2-container-class", containerClass)
+                .Apply(t => t.Data("dropdowncssclass", string.Concat(t.Attr("data-dropdowncssclass"), " ", dropdownCssClass).Trim()),
+                    when: !string.IsNullOrWhiteSpace(dropdownCssClass))
+                .Apply(t => t.Data("placeholder", placeHolder),
+                    when: !string.IsNullOrWhiteSpace(placeHolder))
+                .Apply(t => t.Data("allow-clear", allowClear),
+                    when: allowClear)
+                .Apply(t => t.Data("unconstrained-element", unconstrainedElement),
+                    when: !string.IsNullOrWhiteSpace(unconstrainedElement))
+                .Apply(t => t.Data("custom-filter-callback", customFilterCallback),
+                    when: !string.IsNullOrWhiteSpace(customFilterCallback));
         }
 
-        public static MvcHtmlString Select2MultiFor<TModel, TValueProp>(this HtmlHelper<TModel> htmlHelper, Expression<System.Func<TModel, TValueProp>> valueExpression, IEnumerable<SelectListItem> items, IDictionary<string, object> htmlAttributes = null, bool disabled = false, bool required = false)
+        public static HtmlTag Select2MultiFor<TModel, TValueProp>(
+            this HtmlTagHelper<TModel> helper, 
+            Expression<Func<TModel, TValueProp>> valueExpression, 
+            IEnumerable<SelectListItem> items, 
+            bool required = false)
         {
-            htmlAttributes = htmlAttributes ?? new Dictionary<string, object>();
-            htmlAttributes["data-provide"] = "select2";
-            if ((disabled))
-            {
-                htmlAttributes["disabled"] = "disabled";
-            }
-            if ((required))
-            {
-                htmlAttributes["data-val"] = "true";
-                htmlAttributes["data-val-required"] = "";
-            }
-            return htmlHelper.ListBoxFor(valueExpression, items, htmlAttributes);
+            return helper.SelectFor(valueExpression, OptionsList.Create(items))
+                .BoolAttr("multiple", true)
+                .Attr("data-provide", "select2");
         }
 
-        public static MvcHtmlString FileUpload(this HtmlHelper htmlHelper, string name, string id = null, string url = null)
+        public static MvcHtmlString FileUpload(
+            this HtmlHelper htmlHelper, 
+            string name, 
+            string id = null, 
+            string url = null)
         {
             return htmlHelper.Partial("~/Views/Shared/_FileUpload.cshtml", new Models.Shared.FileUpload
             {
                 ID = id,
                 Url = url,
-                TextBoxBuilder = (IDictionary<string, object> htmlAttributes) => { return htmlHelper.TextBox(name, null, new { Type = "file" }); }
+                TextBoxTag = htmlHelper.Tags().File(name)
             });
         }
 
-        public static MvcHtmlString FileUploadFor<TModel, TValue>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TValue>> expression, string id = null, string url = null, string urlFieldName = "fileUrl", string isEmptyFieldName = "fileIsEmpty")
+        public static MvcHtmlString FileUploadFor<TModel, TValue>(
+            this HtmlHelper<TModel> htmlHelper, 
+            Expression<Func<TModel, TValue>> expression, 
+            string id = null, 
+            string url = null, 
+            string urlFieldName = "fileUrl", 
+            string isEmptyFieldName = "fileIsEmpty")
         {
             return htmlHelper.Partial("~/Views/Shared/_FileUpload.cshtml", new Models.Shared.FileUpload
             {
                 ID = id,
                 Url = url,
-                TextBoxBuilder = (IDictionary<string, object> htmlAttributes) =>
-                {
-                    htmlAttributes.Add("type", "file");
-                    return htmlHelper.TextBox2For(expression, htmlAttributes: htmlAttributes);
-                },
+                TextBoxTag = htmlHelper.Tags().FileFor(expression),
                 UrlFieldName = urlFieldName,
                 IsEmptyFieldName = isEmptyFieldName
             });
