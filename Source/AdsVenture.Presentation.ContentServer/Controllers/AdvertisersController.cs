@@ -72,6 +72,11 @@ namespace AdsVenture.Presentation.ContentServer.Controllers
         private ActionResult GetEditView(Guid id, Core.DTO.AdvertiserUpdate data = null)
         {
             var e = _manager.Find(id);
+
+            if (e == null)
+            {
+                ThrowHttpNotFound();
+            }
             
             ViewBag.AddPathNodeWithTitle = e.Name;
 
