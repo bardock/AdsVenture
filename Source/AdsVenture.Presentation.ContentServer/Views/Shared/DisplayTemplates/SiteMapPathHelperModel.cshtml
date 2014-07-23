@@ -2,15 +2,22 @@
 @using System.Web.Mvc.Html
 @using System.Linq
 @using MvcSiteMapProvider.Web.Html.Models
+@using Bardock.Utils.Collections;
 
 @{
     var nodes = Model.Skip(1);
-    if (nodes.Any())
+    var addPathNodeWithTitle = ViewContext.Controller.ViewBag.AddPathNodeWithTitle;
+
+    if (nodes.Any() || addPathNodeWithTitle != null)
     {
         <ol class="breadcrumb">
-            @foreach (var node in Model.Skip(1))
+            @foreach (var node in nodes)
             {
                 <li class="@(node.IsCurrentNode ? "active" : "")">@Html.DisplayFor(m => node)</li>
+            }
+            @if (addPathNodeWithTitle != null)
+            {
+                <li class="active">@addPathNodeWithTitle</li>
             }
         </ol>
     }

@@ -25,6 +25,7 @@ namespace AdsVenture.Presentation.ContentServer.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.AddPathNodeWithTitle = Resources.Global.Search;
             return View();
         }
 
@@ -76,6 +77,8 @@ namespace AdsVenture.Presentation.ContentServer.Controllers
         private ActionResult GetEditView(Guid id, Core.DTO.AdvertiserUpdate data = null)
         {
             var e = _manager.Find(id);
+            
+            ViewBag.AddPathNodeWithTitle = e.Name;
 
             if(data != null)
             { 
