@@ -1,5 +1,6 @@
 ﻿using AdsVenture.Commons.Pagination;
 using AdsVenture.Core.Managers;
+using AutoMapper;
 using Bardock.Utils.Extensions;
 using Bardock.Utils.Web.Mvc.HtmlTags;
 using System;
@@ -39,10 +40,16 @@ namespace AdsVenture.Presentation.ContentServer.Controllers
 
         public ActionResult Add()
         {
-            var model = new Models.Advertisers.Form() 
+            return GetAddView();
+        }
+
+        private ActionResult GetAddView(Commons.Entities.Advertiser e = null)
+        {
+            var model = new Models.Advertisers.Form()
             {
                 IsNew = true,
-                CountryOptions = OptionsList.Create(_countryManager.FindAll(), display: x => x.Description, value: x => x.ID)
+                CountryOptions = OptionsList.Create(_countryManager.FindAll(), display: x => x.Description, value: x => x.ID),
+                Entity = e
             };
             return View("Form", model);
         }
@@ -64,7 +71,7 @@ namespace AdsVenture.Presentation.ContentServer.Controllers
             {
                 Notifications.AddError(Commons.Resources.Shared.Error_Undefined);
             }
-            return Add();
+            return GetAddView(Mapper.Map<Commons.Entities.Advertiser>(data));
         }
 
         [HttpPost]
