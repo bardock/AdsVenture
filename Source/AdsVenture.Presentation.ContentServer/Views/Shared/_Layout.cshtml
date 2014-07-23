@@ -19,7 +19,11 @@
     @Html.MvcSiteMap().SiteMapPath()
 
     <div class="container body-content">
+
+        @Html.Partial("~/Views/Shared/_Notifications.cshtml")
+
         @RenderBody()
+
     </div>
 
     @RenderSection("modals", required: false)

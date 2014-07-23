@@ -1,0 +1,17 @@
+﻿<div id="notifications">
+    <script id="notifications-template" type="text/html">
+        <div id="{{notificationId}}" class="alert alert-{{level}}">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <p>{{message}}</p>
+        </div>
+    </script>
+    <script id="notifications-template-linkedid" type="text/html">
+        <div id="{{notification-id}}" class="alert alert-{{level}}">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <p>{{message}} (ID: <a href="{{url}}">{{id}}</a>)</p>
+        </div>
+    </script>
+    <script>
+        var notifications_init = @Html.Json(Bardock.Utils.Web.RequestNotifications.Instance.Items.ToUIModel().ToArray());
+    </script>
+</div>

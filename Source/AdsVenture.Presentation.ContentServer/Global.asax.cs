@@ -6,6 +6,8 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using AdsVenture.Commons.Helpers;
 using AdsVenture.Core;
+using System.Web;
+using Bardock.Utils.Web;
 
 namespace AdsVenture.Presentation.ContentServer
 {
@@ -31,6 +33,27 @@ namespace AdsVenture.Presentation.ContentServer
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             Bootstrapper.Init(ServiceLocator);
+        }
+
+        protected virtual void Application_BeginRequest()
+        {
+        }
+
+        protected virtual void Application_EndRequest()
+        {
+            if (HttpContext.Current.Response.IsRequestBeingRedirected)
+            {
+                RequestNotifications.Instance.PersistState();
+            }
+        }
+
+        protected void Application_AcquireRequestState(object sender, EventArgs e)
+        {
+        }
+
+        void Application_Error(object sender, EventArgs e)
+        {
+            Filters.ExceptionLogging.Log(Server.GetLastError());
         }
     }
 }
