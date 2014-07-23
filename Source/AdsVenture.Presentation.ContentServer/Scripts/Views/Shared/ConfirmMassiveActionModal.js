@@ -25,7 +25,7 @@ var Views;
                     this.notifications.showError(Resources.Error_MustSelectAnyItem);
                     return;
                 }
-                this.$modal.find(".confirm-description").empty().mustache(this.templateId, [items]).show();
+                this.$modal.find(".confirm-description").empty().mustache(this.templateId, items).show();
                 this.$modal.modal();
             };
             return ConfirmMassiveActionModal;

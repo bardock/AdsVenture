@@ -1,21 +1,25 @@
 ﻿@model AdsVenture.Presentation.ContentServer.Models.Shared.ConfirmModal
 
-<div id="@Model.ID" class="modal hide" data-backdrop="true" tabindex="-1" role="dialog" aria-labelledby="modal_confirm_title" aria-hidden="true">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="modal_confirm_title">@Model.Title</h3>
-    </div>
-    <div class="modal-body">
-        <p>@Model.Question</p>
-        <div class="confirm-description hide">
+<div id="@Model.ID" class="modal" data-backdrop="true" tabindex="-1" role="dialog" aria-labelledby="modal_confirm_title" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="modal_confirm_title">@Model.Title</h3>
+            </div>
+            <div class="modal-body">
+                <p>@Model.Question</p>
+                <div class="confirm-description">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btnConfirm btn-primary pull-left" onclick="@Model.OnConfirm" data-dismiss="modal" aria-hidden="true">
+                    @Resources.Global.Accept
+                </button>
+                <button class="btn btn-link btn_negative pull-left" data-dismiss="modal" aria-hidden="true">
+                    @Resources.Global.Cancel
+                </button>
+            </div>
         </div>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btnConfirm btn-primary pull-left" onclick="@Model.OnConfirm" data-dismiss="modal" aria-hidden="true">
-            @Resources.Global.Accept
-        </button>
-        <button class="btn btn-link btn_negative pull-left" data-dismiss="modal" aria-hidden="true">
-            @Resources.Global.Cancel
-        </button>
     </div>
 </div>
