@@ -106,6 +106,15 @@ namespace AdsVenture.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A Publisher with name &apos;{0}&apos; already exists.
+        /// </summary>
+        public static string Publisher_Name_AlreadyExists {
+            get {
+                return ResourceManager.GetString("Publisher_Name_AlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You are not authorized to perform the action.
         /// </summary>
         public static string UnauthorizedException {

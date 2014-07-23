@@ -99,6 +99,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="DTO\PublisherCreate.cs" />
+    <Compile Include="DTO\PublisherUpdate.cs" />
     <Compile Include="DTO\AdvertiserUpdate.cs" />
     <Compile Include="DTO\AdvertiserCreate.cs" />
     <Compile Include="DTO\SlotEvent.cs" />
@@ -117,6 +119,7 @@
     <Compile Include="Helpers\ConfigSection.cs" />
     <Compile Include="Extensions\Entities\ICountryNavigatorExtensions.cs" />
     <Compile Include="Helpers\UnitOfWork.cs" />
+    <Compile Include="Managers\PublisherManager.cs" />
     <Compile Include="Managers\AdvertiserManager.cs" />
     <Compile Include="Managers\CountryManager.cs" />
     <Compile Include="Managers\IManager.cs" />

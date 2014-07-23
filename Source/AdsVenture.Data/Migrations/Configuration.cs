@@ -301,7 +301,8 @@ namespace AdsVenture.Data.Migrations
             {
                 ID = Guid.Parse("66b0cd5e1c214307a5192204022dbceb"),
                 Name = "pub1",
-                CountryID = 1
+                CountryID = 1,
+                CreatedOn = new DateTime(2014,1,1)
             };
             context.Publishers.AddOrUpdate(pub1);
             context.SaveChanges();

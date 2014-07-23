@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AdsVenture.Commons.Entities
 {
-    public class Publisher : IEntity
+    public class Publisher : IEntity, ICountryNavigator
     {
         public Guid ID { get; set; }
 
@@ -17,8 +17,20 @@ namespace AdsVenture.Commons.Entities
 
         public Country Country { get; set; }
 
+        public bool Active { get; set; }
+
+        public DateTime CreatedOn { get; set; }
+
+        public DateTime? UpdatedOn { get; set; }
+
         public Publisher()
         {
+            this.Active = true;
+        }
+
+        public short? _CountryID
+        {
+            get { return this.CountryID; }
         }
     }
 }

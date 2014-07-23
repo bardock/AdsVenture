@@ -47,6 +47,8 @@ namespace AdsVenture.Core
         {
             AutoMapper.Mapper.CreateMap<DTO.AdvertiserCreate, Commons.Entities.Advertiser>().ReverseMap();
             AutoMapper.Mapper.CreateMap<DTO.AdvertiserUpdate, Commons.Entities.Advertiser>().ReverseMap();
+            AutoMapper.Mapper.CreateMap<DTO.PublisherCreate, Commons.Entities.Publisher>().ReverseMap();
+            AutoMapper.Mapper.CreateMap<DTO.PublisherUpdate, Commons.Entities.Publisher>().ReverseMap();
             AutoMapper.Mapper.CreateMap<DTO.SlotEvent, Commons.Entities.SlotEvent>();
             AutoMapper.Mapper.CreateMap<DTO.SlotEventTarget, Commons.Entities.SlotEventTarget>();
         }

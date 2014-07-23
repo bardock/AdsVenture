@@ -54,6 +54,7 @@ namespace AdsVenture.Presentation.ContentServer
                 "~/Scripts/Views/ModalView.js",
                 "~/Scripts/Views/Shared/ConfirmMassiveActionModal.js",
                 "~/Scripts/Views/Shared/ChainedCheckboxList.js",
+                "~/Scripts/Views/Publishers/Index.js",
                 "~/Scripts/Views/Advertisers/Index.js"
             ));
 

@@ -9,6 +9,11 @@
       <mvcSiteMapNode title="Add" controller="advertisers" action="add"/>
       <mvcSiteMapNode title="Edit" controller="advertisers" action="edit" visibility="!MenuHelper" preservedRouteParameters="id" />
     </mvcSiteMapNode>
+    <mvcSiteMapNode title="Publishers" controller="publishers" action="index">
+      <mvcSiteMapNode title="Search" controller="publishers" action="index"/>
+      <mvcSiteMapNode title="Add" controller="publishers" action="add"/>
+      <mvcSiteMapNode title="Edit" controller="publishers" action="edit" visibility="!MenuHelper" preservedRouteParameters="id" />
+    </mvcSiteMapNode>
   </mvcSiteMapNode>
 
 </mvcSiteMap>

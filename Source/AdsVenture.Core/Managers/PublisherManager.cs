@@ -9,37 +9,37 @@ using System.Transactions;
 
 namespace AdsVenture.Core.Managers
 {
-    public class AdvertiserManager : _BaseEntityManager<Content>
+    public class PublisherManager : _BaseEntityManager<Content>
     {
-        public AdvertiserManager(
+        public PublisherManager(
             Helpers.IUnitOfWork unitOfWork)
             : base(unitOfWork) 
         {
         }
 
-        private IQueryable<Advertiser> GetActiveQuery()
+        private IQueryable<Publisher> GetActiveQuery()
         {
-            return Db.Advertisers.Where(x => x.Active);
+            return Db.Publishers.Where(x => x.Active);
         }
 
-        public virtual Advertiser Find(Guid id)
+        public virtual Publisher Find(Guid id)
         {
             return GetActiveQuery().FirstOrDefault(x => x.ID == id);
         }
 
-        public virtual List<Advertiser> FindAll()
+        public virtual List<Publisher> FindAll()
         {
             return GetActiveQuery().ToList();
         }
 
-        public virtual List<Advertiser> FindAll(Guid[] ids)
+        public virtual List<Publisher> FindAll(Guid[] ids)
         {
             return GetActiveQuery()
                 .Where(x => ids.Contains(x.ID))
                 .ToList();
         }
 
-        public virtual PageData<Advertiser> FindAll(PageParams pageParams = null)
+        public virtual PageData<Publisher> FindAll(PageParams pageParams = null)
         {
             var query = GetActiveQuery();
 
@@ -51,11 +51,11 @@ namespace AdsVenture.Core.Managers
             return query.Order(pageParams, x => x.ID).Page(pageParams);
         }
 
-        private void ValidateCreate(DTO.AdvertiserCreate data)
+        private void ValidateCreate(DTO.PublisherCreate data)
         {
             var name = data.Name.ToLower().Trim();
 
-            var alreadyExistName = Db.Advertisers.Any(x => x.Active && x.Name.ToLower() == name);
+            var alreadyExistName = Db.Publishers.Any(x => x.Active && x.Name.ToLower() == name);
 
             if (alreadyExistName)
                 throw new InvalidMediaGroupDescriptionException(data.Name);
@@ -64,14 +64,14 @@ namespace AdsVenture.Core.Managers
         public class InvalidMediaGroupDescriptionException : Exceptions.BusinessUserException
         {
             public InvalidMediaGroupDescriptionException(string name)
-                : base(String.Format(Resources.BusinessExceptions.Advertiser_Name_AlreadyExists, name)) { }
+                : base(String.Format(Resources.BusinessExceptions.Publisher_Name_AlreadyExists, name)) { }
         }
 
-        public Advertiser Create(DTO.AdvertiserCreate data)
+        public Publisher Create(DTO.PublisherCreate data)
         {
             ValidateCreate(data);
 
-            var e = Mapper.Map<Advertiser>(data);
+            var e = Mapper.Map<Publisher>(data);
             e.ID = Guid.NewGuid();
             e.CreatedOn = DateTime.UtcNow;
             //e.CreatedByID = UserId;
@@ -80,12 +80,12 @@ namespace AdsVenture.Core.Managers
             return e;
         }
 
-        public Advertiser Update(DTO.AdvertiserUpdate data)
+        public Publisher Update(DTO.PublisherUpdate data)
         {
             var e = Find(data.ID);
 
             if (e == null)
-                throw new Exceptions.EntityNotFoundException<Advertiser>();
+                throw new Exceptions.EntityNotFoundException<Publisher>();
 
             e = Mapper.Map(data, e);
             e.UpdatedOn = DateTime.UtcNow;
@@ -112,7 +112,7 @@ namespace AdsVenture.Core.Managers
             }
         }
 
-        private void Delete(Advertiser e)
+        private void Delete(Publisher e)
         {
             e.Active = false;
             e.UpdatedOn = DateTime.UtcNow;
