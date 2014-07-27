@@ -16,13 +16,19 @@ namespace AdsVenture.Commons.Entities
 
         public Advertiser Advertiser { get; set; }
 
-
         [Required]
         [MaxLength(255)]
         public string Url { get; set; }
 
+        public bool Active { get; set; }
+
+        public DateTime CreatedOn { get; set; }
+
+        public DateTime? UpdatedOn { get; set; }
+
         public Content()
         {
+            this.Active = true;
         }
     }
 }

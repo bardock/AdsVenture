@@ -79,6 +79,7 @@
     <Compile Include="DTO\MediaObjectBasic.cs" />
     <Compile Include="Exceptions\DuplicatedEntryException.cs" />
     <Compile Include="Helpers\ConfigSection.cs" />
+    <Compile Include="Helpers\Extensions\QueryableExtensions.cs" />
     <Compile Include="Migrations\201406222220537_Initial.cs" />
     <Compile Include="Migrations\201406222220537_Initial.Designer.cs">
       <DependentUpon>201406222220537_Initial.cs</DependentUpon>
@@ -102,6 +103,10 @@
     <Compile Include="Migrations\201407230338020_Publisher-Active-CreatedOn-UpdatedOn.cs" />
     <Compile Include="Migrations\201407230338020_Publisher-Active-CreatedOn-UpdatedOn.Designer.cs">
       <DependentUpon>201407230338020_Publisher-Active-CreatedOn-UpdatedOn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201407271449040_Content-Active-CreatedOn-UpdatedOn.cs" />
+    <Compile Include="Migrations\201407271449040_Content-Active-CreatedOn-UpdatedOn.Designer.cs">
+      <DependentUpon>201407271449040_Content-Active-CreatedOn-UpdatedOn.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -140,6 +145,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201407230338020_Publisher-Active-CreatedOn-UpdatedOn.resx">
       <DependentUpon>201407230338020_Publisher-Active-CreatedOn-UpdatedOn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407271449040_Content-Active-CreatedOn-UpdatedOn.resx">
+      <DependentUpon>201407271449040_Content-Active-CreatedOn-UpdatedOn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

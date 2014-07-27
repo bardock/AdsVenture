@@ -55,7 +55,8 @@ namespace AdsVenture.Presentation.ContentServer
                 "~/Scripts/Views/Shared/ConfirmMassiveActionModal.js",
                 "~/Scripts/Views/Shared/ChainedCheckboxList.js",
                 "~/Scripts/Views/Publishers/Index.js",
-                "~/Scripts/Views/Advertisers/Index.js"
+                "~/Scripts/Views/Advertisers/Index.js",
+                "~/Scripts/Views/Contents/Index.js"
             ));
 
             bundles.Add(new StyleBundle("~/Content/css/site").Include(

@@ -99,6 +99,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="DTO\ContentUpdate.cs" />
+    <Compile Include="DTO\ContentCreate.cs" />
     <Compile Include="DTO\PublisherCreate.cs" />
     <Compile Include="DTO\PublisherUpdate.cs" />
     <Compile Include="DTO\AdvertiserUpdate.cs" />

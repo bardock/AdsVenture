@@ -14,6 +14,11 @@
       <mvcSiteMapNode title="Add" controller="publishers" action="add"/>
       <mvcSiteMapNode title="Edit" controller="publishers" action="edit" visibility="!MenuHelper" preservedRouteParameters="id" />
     </mvcSiteMapNode>
+    <mvcSiteMapNode title="Contents" controller="contents" action="index">
+      <mvcSiteMapNode title="Search" controller="contents" action="index"/>
+      <mvcSiteMapNode title="Add" controller="contents" action="add"/>
+      <mvcSiteMapNode title="Edit" controller="contents" action="edit" visibility="!MenuHelper" preservedRouteParameters="id" />
+    </mvcSiteMapNode>
   </mvcSiteMapNode>
 
 </mvcSiteMap>

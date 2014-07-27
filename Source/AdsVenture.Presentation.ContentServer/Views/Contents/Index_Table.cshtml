@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Content>
+
+@{
+    Layout = null;
+    var HtmlItem = Html.ToItemModel();
+}
+<table id="datatable" class="table table-striped table-bordered dataTable">
+    <thead>
+        <tr>
+            <th data-sortable="false" class="col-check">
+                <input class="checkall" type="checkbox">
+            </th>
+            <th data-sort-field="@HtmlItem.DisplayLiteral((m) => m.ID)">
+                @HtmlItem.DisplayEntityNameFor((m) => m.ID)
+            </th>
+            <th data-sort-field="@HtmlItem.DisplayLiteral((m) => m.Advertiser.Name)" data-sort-default="asc">
+                @HtmlItem.DisplayEntityNameFor((m) => m.Advertiser)
+            </th>
+            <th data-sort-field="@HtmlItem.DisplayLiteral((m) => m.Title)" data-sort-default="asc">
+               @HtmlItem.DisplayEntityNameFor((m) => m.Title)
+            </th>
+            <th data-sort-field="@HtmlItem.DisplayLiteral((m) => m.CreatedOn)">
+               @HtmlItem.DisplayEntityNameFor((m) => m.CreatedOn)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var m in Model)
+        {
+            HtmlItem = Html.ToItemModel(m);
+            <tr>
+                <td>
+                    <input type="checkbox" name="check-id" value="@m.ID">
+                </td>
+                <td>
+                    <a href="@Url.Action("edit", new { id = m.ID })">
+                        @HtmlItem.DisplayFor(x => x.ID)
+                    </a>
+                </td>
+                <td>
+                    @m.Advertiser.Name
+                </td>
+                <td>
+                    <span data-descriptor-field="@HtmlItem.DisplayLiteral(x => x.Title)">
+                        @m.Title
+                    </span>
+                </td>
+                <td>@m.CreatedOn.Format()</td>
+            </tr>
+        }
+    </tbody>
+</table>

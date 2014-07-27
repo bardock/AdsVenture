@@ -1,0 +1,44 @@
+﻿@model AdsVenture.Presentation.ContentServer.Models.Contents.Form
+
+@{
+    var HtmlEntity = Html.ToInnerModel(x => x.Entity);
+}
+
+<form role="form" method="post">
+    @if (!Model.IsNew)
+    {
+        @HtmlEntity.HiddenFor(m => m.ID)
+    }
+
+    <div class="form-group">
+        <label for="@HtmlEntity.IdFor(m => m.Title)" class="control-label">
+            @HtmlEntity.DisplayEntityNameFor(m => m.Title)
+        </label>
+        @HtmlEntity.Tags().TextBoxFor(m => m.Title).AddClass("form-control")
+    </div>
+
+    <div class="form-group">
+        <label for="@HtmlEntity.IdFor(m => m.AdvertiserID)" class="control-label">
+            @HtmlEntity.DisplayEntityNameFor(m => m.AdvertiserID)
+        </label>
+        @(HtmlEntity.Tags().SelectFor(
+                m => m.AdvertiserID,
+                Model.AdvertiserOptions)
+            .AddDefaultOption()
+            .AddClass("form-control"))
+    </div>
+
+    <h4>Content Reference</h4>
+
+    <div class="form-group">
+        <label for="@HtmlEntity.IdFor(m => m.Url)" class="control-label">
+            @HtmlEntity.DisplayEntityNameFor(m => m.Url)
+        </label>
+        @HtmlEntity.Tags().TextBoxFor(m => m.Url).AddClass("form-control")
+    </div>
+
+    <div class="">
+        <button type="submit" class="btn btn-primary">@Resources.Global.Save</button>
+        <a class="btn btn-link btn_negative" href="@Url.Action("")">@Resources.Global.Cancel</a>
+    </div>
+</form>

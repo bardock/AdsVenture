@@ -235,10 +235,11 @@
     <Compile Include="App_Start\ModelBindersConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ContentsController.cs" />
     <Compile Include="Controllers\Api\PublishersController.cs" />
     <Compile Include="Controllers\PublishersController.cs" />
     <Compile Include="Controllers\Api\AdvertisersController.cs" />
-    <Compile Include="Controllers\Api\ContentController.cs" />
+    <Compile Include="Controllers\Api\ContentsController.cs" />
     <Compile Include="Controllers\AdvertisersController.cs" />
     <Compile Include="Controllers\ContentReferenceController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -270,6 +271,7 @@
     <Compile Include="Helpers\WebViewPageExtensions.cs" />
     <Compile Include="Helpers\XmlTypeExtensions.cs" />
     <Compile Include="ModelBinders\UtcDateTimeConverter.cs" />
+    <Compile Include="Models\Contents\Form.cs" />
     <Compile Include="Models\Publishers\Form.cs" />
     <Compile Include="Models\Advertisers\Form.cs" />
     <Compile Include="Models\ErrorInfo.cs" />
@@ -390,6 +392,9 @@
     <Content Include="Views\Publishers\Form.cshtml" />
     <Content Include="Views\Publishers\Index.cshtml" />
     <Content Include="Views\Publishers\Index_Table.cshtml" />
+    <Content Include="Views\Contents\Form.cshtml" />
+    <Content Include="Views\Contents\Index.cshtml" />
+    <Content Include="Views\Contents\Index_Table.cshtml" />
     <None Include="Web.ConnectionStrings.config">
       <SubType>Designer</SubType>
     </None>
@@ -452,6 +457,7 @@
     <TypeScriptCompile Include="Scripts\typings\mustache\jquery.mustache.js.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\mustache\mustache.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\select2\select2.d.ts" />
+    <TypeScriptCompile Include="Scripts\Views\Contents\Index.ts" />
     <TypeScriptCompile Include="Scripts\Views\Publishers\Index.ts" />
     <TypeScriptCompile Include="Scripts\Views\Advertisers\Index.ts" />
     <TypeScriptCompile Include="Scripts\Views\BaseView.ts" />
