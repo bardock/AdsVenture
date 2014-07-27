@@ -21,12 +21,16 @@ namespace AdsVenture.Core.Managers
         {
         }
 
-        private IQueryable<Campaign> GetActiveQuery(
-            bool includeAdvertiser = false)
+        internal IQueryable<Campaign> GetActiveQuery()
         {
             return Db.Campaigns
-                .Where(x => x.Active)
-                .Include(x => x.Advertiser, when: includeAdvertiser);
+                .Where(x => x.Active);
+        }
+
+        internal IQueryable<Campaign> GetToConsumeQuery()
+        {
+            return GetActiveQuery()
+                .Where(x => x.EndsOn == null || x.EndsOn > DateTime.UtcNow);
         }
 
         public virtual Campaign Find(Guid id)
@@ -48,7 +52,8 @@ namespace AdsVenture.Core.Managers
 
         public virtual PageData<Campaign> FindAll(PageParams pageParams = null)
         {
-            var query = GetActiveQuery(includeAdvertiser: true);
+            var query = GetActiveQuery()
+                .Include(x => x.Advertiser);
 
             if (pageParams != null && !string.IsNullOrEmpty(pageParams.Search))
             {

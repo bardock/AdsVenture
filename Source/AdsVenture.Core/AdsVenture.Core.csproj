@@ -126,6 +126,8 @@
     <Compile Include="Extensions\Entities\ICountryNavigatorExtensions.cs" />
     <Compile Include="Helpers\UnitOfWork.cs" />
     <Compile Include="Managers\CampaignManager.cs" />
+    <Compile Include="Managers\ContentDeliveryManager.cs" />
+    <Compile Include="Managers\SlotEventManager.cs" />
     <Compile Include="Managers\SlotManager.cs" />
     <Compile Include="Managers\PublisherManager.cs" />
     <Compile Include="Managers\AdvertiserManager.cs" />

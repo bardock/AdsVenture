@@ -1,6 +1,6 @@
-﻿using AdsVenture.Commons.Entities.DataAnotations;
-using AdsVenture.Commons.Entities.Interfaces;
+﻿using AdsVenture.Commons.Entities.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace AdsVenture.Commons.Entities
@@ -24,9 +24,12 @@ namespace AdsVenture.Commons.Entities
 
         public DateTime? UpdatedOn { get; set; }
 
+        public virtual ICollection<Content> Contents { get; set; }
+
         public Advertiser()
         {
             this.Active = true;
+            Contents = new HashSet<Content>();
         }
 
         public short? _CountryID

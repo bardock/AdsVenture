@@ -43,7 +43,6 @@ namespace AdsVenture.Data
         public DbSet<Advertiser> Advertisers { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
         public DbSet<Content> Contents { get; set; }
-        public DbSet<ContentImpression> ContentImpressions { get; set; }
         public DbSet<Campaign> Campaigns { get; set; }
         public DbSet<Slot> Slots { get; set; }
         public DbSet<SlotEvent> SlotEvents { get; set; }

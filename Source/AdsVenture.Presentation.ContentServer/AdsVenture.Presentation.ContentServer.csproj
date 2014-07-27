@@ -236,6 +236,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Api\CampaignsController.cs" />
+    <Compile Include="Controllers\Api\ContentDeliveryController.cs" />
     <Compile Include="Controllers\Api\SlotsController.cs" />
     <Compile Include="Controllers\CampaignsController.cs" />
     <Compile Include="Controllers\SlotsController.cs" />

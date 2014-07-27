@@ -21,12 +21,10 @@ namespace AdsVenture.Core.Managers
         {
         }
 
-        private IQueryable<Slot> GetActiveQuery(
-            bool includePublisher = false)
+        internal IQueryable<Slot> GetActiveQuery()
         {
             return Db.Slots
-                .Where(x => x.Active)
-                .Include(x => x.Publisher, when: includePublisher);
+                .Where(x => x.Active);
         }
 
         public virtual Slot Find(Guid id)
@@ -48,7 +46,8 @@ namespace AdsVenture.Core.Managers
 
         public virtual PageData<Slot> FindAll(PageParams pageParams = null)
         {
-            var query = GetActiveQuery(includePublisher: true);
+            var query = GetActiveQuery()
+                .Include(x => x.Publisher);
 
             if (pageParams != null && !string.IsNullOrEmpty(pageParams.Search))
             {

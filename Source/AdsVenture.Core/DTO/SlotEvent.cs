@@ -2,7 +2,7 @@
 
 namespace AdsVenture.Core.DTO
 {
-    public class SlotEvent
+    public class SlotUserEvent
     {
         public Guid SlotID { get; set; }
 

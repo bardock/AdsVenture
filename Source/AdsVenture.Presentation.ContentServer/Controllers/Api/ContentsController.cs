@@ -8,7 +8,6 @@ using System.Web.Http;
 
 namespace AdsVenture.Presentation.ContentServer.Controllers.Api
 {
-    [RoutePrefix("api/contents")]
     public class ContentsController : ApiController
     {
         ContentManager _manager;
@@ -22,26 +21,6 @@ namespace AdsVenture.Presentation.ContentServer.Controllers.Api
         public void DeleteMassive(Models.Shared.MassiveParams<Guid> param)
         {
             _manager.Delete(param.IDs);
-        }
-
-        [HttpGet]
-        [Route("slot/{slotID}")]
-        public object RenderSlot(Guid slotID)
-        {
-            var c = _manager.Impress(slotID);
-            return new
-            {
-                ContentID = c.ID,
-                Html = _manager.Render(c)
-            };
-        }
-
-        [HttpPost]
-        [Route("slot/{slotID}/event")]
-        public void PostSlotEvent(Guid slotID, Core.DTO.SlotEvent data)
-        {
-            data.SlotID = slotID;
-            _manager.CreateSlotEvent(data);
         }
     }
 }

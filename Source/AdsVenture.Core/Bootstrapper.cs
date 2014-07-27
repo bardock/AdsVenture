@@ -53,7 +53,7 @@ namespace AdsVenture.Core
             AutoMapper.Mapper.CreateMap<DTO.ContentUpdate, Commons.Entities.Content>().ReverseMap();
             AutoMapper.Mapper.CreateMap<DTO.SlotCreate, Commons.Entities.Slot>().ReverseMap();
             AutoMapper.Mapper.CreateMap<DTO.SlotUpdate, Commons.Entities.Slot>().ReverseMap();
-            AutoMapper.Mapper.CreateMap<DTO.SlotEvent, Commons.Entities.SlotEvent>();
+            AutoMapper.Mapper.CreateMap<DTO.SlotUserEvent, Commons.Entities.SlotEvent>();
             AutoMapper.Mapper.CreateMap<DTO.SlotEventTarget, Commons.Entities.SlotEventTarget>();
             AutoMapper.Mapper.CreateMap<DTO.CampaignCreate, Commons.Entities.Campaign>().ReverseMap();
             AutoMapper.Mapper.CreateMap<DTO.CampaignUpdate, Commons.Entities.Campaign>().ReverseMap();

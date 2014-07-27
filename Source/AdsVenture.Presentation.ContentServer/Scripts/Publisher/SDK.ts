@@ -10,7 +10,7 @@ module Publisher {
                 var slot = c.getAttribute("data-slot");
                 if (!slot) return;
                 this.api("GET",
-                    "http://dev.content.avt.com/api/contents/slot/" + slot,
+                    "http://dev.content.avt.com/api/contentDelivery/slot/" + slot,
                     null,
                     this.getAppendContentHandler(c, slot)
                 );
@@ -66,7 +66,7 @@ module Publisher {
                         console.log(data); // TODO remove
                         data.contentID = contentID;
                         this.api("POST",
-                            "http://dev.content.avt.com/api/contents/slot/" + slotID + "/event",
+                            "http://dev.content.avt.com/api/contentDelivery/slot/" + slotID + "/event",
                             data
                         );
                     });

@@ -4,9 +4,17 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AdsVenture.Commons.Entities
 {
+    public enum SlotEventDiscriminator
+    {
+        Impression = 1,
+        UserInteraction = 2
+    }
+
     public class SlotEvent : IEntity
     {
         public Guid ID { get; set; }
+
+        public SlotEventDiscriminator Discriminator { get; set; }
 
         public Guid SlotID { get; set; }
 
@@ -15,6 +23,10 @@ namespace AdsVenture.Commons.Entities
         public Guid ContentID { get; set; }
 
         public Content Content { get; set; }
+
+        public Guid? CampaignID { get; set; }
+
+        public Campaign Campaign { get; set; }
 
         [MaxLength(10)]
         public string EventType { get; set; }
@@ -29,6 +41,7 @@ namespace AdsVenture.Commons.Entities
 
         public SlotEvent()
         {
+            Target = new SlotEventTarget();
         }
     }
 

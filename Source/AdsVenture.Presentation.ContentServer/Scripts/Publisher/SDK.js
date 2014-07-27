@@ -22,7 +22,7 @@ var Publisher;
                 var slot = c.getAttribute("data-slot");
                 if (!slot)
                     return;
-                this.api("GET", "http://dev.content.avt.com/api/contents/slot/" + slot, null, this.getAppendContentHandler(c, slot));
+                this.api("GET", "http://dev.content.avt.com/api/contentDelivery/slot/" + slot, null, this.getAppendContentHandler(c, slot));
             }
         }
         SDK.prototype.initStyles = function () {
@@ -56,7 +56,7 @@ var Publisher;
                         var data = JSON.parse(e.data);
                         console.log(data); // TODO remove
                         data.contentID = contentID;
-                        _this.api("POST", "http://dev.content.avt.com/api/contents/slot/" + slotID + "/event", data);
+                        _this.api("POST", "http://dev.content.avt.com/api/contentDelivery/slot/" + slotID + "/event", data);
                     });
                 });
 
