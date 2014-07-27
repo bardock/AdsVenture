@@ -99,7 +99,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="DTO\CampaignCreate.cs" />
     <Compile Include="DTO\SlotCreate.cs" />
+    <Compile Include="DTO\CampaignUpdate.cs" />
     <Compile Include="DTO\SlotUpdate.cs" />
     <Compile Include="DTO\ContentUpdate.cs" />
     <Compile Include="DTO\ContentCreate.cs" />
@@ -123,6 +125,7 @@
     <Compile Include="Helpers\ConfigSection.cs" />
     <Compile Include="Extensions\Entities\ICountryNavigatorExtensions.cs" />
     <Compile Include="Helpers\UnitOfWork.cs" />
+    <Compile Include="Managers\CampaignManager.cs" />
     <Compile Include="Managers\SlotManager.cs" />
     <Compile Include="Managers\PublisherManager.cs" />
     <Compile Include="Managers\AdvertiserManager.cs" />

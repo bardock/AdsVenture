@@ -151,6 +151,15 @@ namespace AdsVenture.Commons.Entities.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ends on.
+        /// </summary>
+        public static string EndsOn {
+            get {
+                return ResourceManager.GetString("EndsOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File name.
         /// </summary>
         public static string FileName {

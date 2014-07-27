@@ -235,7 +235,9 @@
     <Compile Include="App_Start\ModelBindersConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Api\CampaignsController.cs" />
     <Compile Include="Controllers\Api\SlotsController.cs" />
+    <Compile Include="Controllers\CampaignsController.cs" />
     <Compile Include="Controllers\SlotsController.cs" />
     <Compile Include="Controllers\ContentsController.cs" />
     <Compile Include="Controllers\Api\PublishersController.cs" />
@@ -273,6 +275,7 @@
     <Compile Include="Helpers\WebViewPageExtensions.cs" />
     <Compile Include="Helpers\XmlTypeExtensions.cs" />
     <Compile Include="ModelBinders\UtcDateTimeConverter.cs" />
+    <Compile Include="Models\Campaigns\Form.cs" />
     <Compile Include="Models\Slots\Form.cs" />
     <Compile Include="Models\Contents\Form.cs" />
     <Compile Include="Models\Publishers\Form.cs" />
@@ -401,6 +404,9 @@
     <Content Include="Views\Slots\Form.cshtml" />
     <Content Include="Views\Slots\Index.cshtml" />
     <Content Include="Views\Slots\Index_Table.cshtml" />
+    <Content Include="Views\Campaigns\Form.cshtml" />
+    <Content Include="Views\Campaigns\Index.cshtml" />
+    <Content Include="Views\Campaigns\Index_Table.cshtml" />
     <None Include="Web.ConnectionStrings.config">
       <SubType>Designer</SubType>
     </None>
@@ -463,6 +469,7 @@
     <TypeScriptCompile Include="Scripts\typings\mustache\jquery.mustache.js.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\mustache\mustache.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\select2\select2.d.ts" />
+    <TypeScriptCompile Include="Scripts\Views\Campaigns\Index.ts" />
     <TypeScriptCompile Include="Scripts\Views\Slots\Index.ts" />
     <TypeScriptCompile Include="Scripts\Views\Contents\Index.ts" />
     <TypeScriptCompile Include="Scripts\Views\Publishers\Index.ts" />

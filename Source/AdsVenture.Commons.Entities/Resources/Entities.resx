@@ -150,6 +150,9 @@
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="EndsOn" xml:space="preserve">
+    <value>Ends on</value>
+  </data>
   <data name="FileName" xml:space="preserve">
     <value>File name</value>
   </data>
