@@ -45,7 +45,9 @@ namespace AdsVenture.Core.Managers
 
             if (pageParams != null && !string.IsNullOrEmpty(pageParams.Search))
             {
-                query = query.Where(p => p.Name.Contains(pageParams.Search));
+                query = query.Where(x => 
+                    x.ID.ToString().Contains(pageParams.Search)
+                    || x.Name.Contains(pageParams.Search));
             }
 
             return query.Order(pageParams, x => x.ID).Page(pageParams);

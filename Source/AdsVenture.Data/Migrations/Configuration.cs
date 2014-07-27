@@ -318,7 +318,7 @@ namespace AdsVenture.Data.Migrations
                 Title = "Ref1",
                 AdvertiserID = adv1.ID,
                 Url = "//adv1.content.avt.com/ContentReference/SampleFluidExternal",
-                CreatedOn = DateTime.UtcNow
+                CreatedOn = new DateTime(2014, 1, 1)
             };
             context.Contents.AddOrUpdate(contentRef1);
             context.SaveChanges();
@@ -340,7 +340,8 @@ namespace AdsVenture.Data.Migrations
                     ID = Guid.Parse("5711d654bb2f411b8dafc4369e74e553"),
                     Title = "Slot1",
                     PublisherID = pub1.ID,
-                    ContentID = contentRef1.ID
+                    ContentID = contentRef1.ID,
+                    CreatedOn = new DateTime(2014, 1, 1)
                 }
             );
             context.SaveChanges();

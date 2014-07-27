@@ -1,0 +1,43 @@
+﻿@using Bardock.Utils.Web.Mvc.Extensions
+@using AdsVenture.Presentation.ContentServer.Helpers
+@using AdsVenture.Presentation.ContentServer.Controllers
+@using AdsVenture.Commons.Entities.Resources
+
+@{
+    var HtmlContent = Html.ToModel<AdsVenture.Commons.Entities.Slot>();
+}
+
+<div >
+
+    <div>
+        @Html.Partial("Index_Table", new List<Slot>())
+    </div>
+
+    <footer class="footer_actions">
+        <a class="btn btn-primary" href="@Url.Action("add")">@Resources.Global.Add</a>
+        <input type="button" class="btn" value="@Resources.Global.Delete" onclick="view.delete.show()">
+    </footer>
+
+</div>
+
+@section modals {
+
+    @Html.Partial_ConfirmModal(new AdsVenture.Presentation.ContentServer.Models.Shared.ConfirmModal()
+    {
+        ID = "modal_deleteMassive",
+        Title = Resources.Global.DeleteFiles,
+        Question = Resources.Global.ConfirmQuestion_DeleteMassive,
+        OnConfirm = "view.deleteMassive()"
+    })
+    <script id="delete-items-template" type="text/html">
+        <ul>{{#.}}<li>{{@HtmlContent.DisplayLiteral(x => x.Title)}}</li>{{/.}}</ul>
+    </script>
+}
+
+@section scripts{
+    <script>
+        view = new Views.Contents.Index(
+            "@Html.Raw(Url.Action2("Index_Table", null))"
+        );
+    </script>
+}

@@ -1,79 +1,69 @@
 ﻿using AdsVenture.Commons.Entities;
 using AdsVenture.Commons.Pagination;
 using AdsVenture.Commons.Pagination.Extensions;
+using AdsVenture.Core.Exceptions;
+using AdsVenture.Data.Helpers.Extensions;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Transactions;
 
 namespace AdsVenture.Core.Managers
 {
-    public class AdvertiserManager : _BaseEntityManager<Content>
+    public class SlotManager : _BaseEntityManager<Slot>
     {
-        public AdvertiserManager(
+        public SlotManager(
             Helpers.IUnitOfWork unitOfWork)
             : base(unitOfWork) 
         {
         }
 
-        private IQueryable<Advertiser> GetActiveQuery()
+        private IQueryable<Slot> GetActiveQuery(
+            bool includePublisher = false)
         {
-            return Db.Advertisers.Where(x => x.Active);
+            return Db.Slots
+                .Where(x => x.Active)
+                .Include(x => x.Publisher, when: includePublisher);
         }
 
-        public virtual Advertiser Find(Guid id)
+        public virtual Slot Find(Guid id)
         {
             return GetActiveQuery().FirstOrDefault(x => x.ID == id);
         }
 
-        public virtual List<Advertiser> FindAll()
+        public virtual List<Slot> FindAll()
         {
             return GetActiveQuery().ToList();
         }
 
-        public virtual List<Advertiser> FindAll(Guid[] ids)
+        public virtual List<Slot> FindAll(Guid[] ids)
         {
             return GetActiveQuery()
                 .Where(x => ids.Contains(x.ID))
                 .ToList();
         }
 
-        public virtual PageData<Advertiser> FindAll(PageParams pageParams = null)
+        public virtual PageData<Slot> FindAll(PageParams pageParams = null)
         {
-            var query = GetActiveQuery();
+            var query = GetActiveQuery(includePublisher: true);
 
             if (pageParams != null && !string.IsNullOrEmpty(pageParams.Search))
             {
                 query = query.Where(x => 
                     x.ID.ToString().Contains(pageParams.Search)
-                    || x.Name.Contains(pageParams.Search));
+                    || x.Title.Contains(pageParams.Search)
+                    || x.Publisher.Name.Contains(pageParams.Search));
             }
 
             return query.Order(pageParams, x => x.ID).Page(pageParams);
         }
 
-        private void ValidateCreate(DTO.AdvertiserCreate data)
+        public Slot Create(DTO.SlotCreate data)
         {
-            var name = data.Name.ToLower().Trim();
-
-            var alreadyExistName = Db.Advertisers.Any(x => x.Active && x.Name.ToLower() == name);
-
-            if (alreadyExistName)
-                throw new InvalidMediaGroupDescriptionException(data.Name);
-        }
-
-        public class InvalidMediaGroupDescriptionException : Exceptions.BusinessUserException
-        {
-            public InvalidMediaGroupDescriptionException(string name)
-                : base(String.Format(Resources.BusinessExceptions.Advertiser_Name_AlreadyExists, name)) { }
-        }
-
-        public Advertiser Create(DTO.AdvertiserCreate data)
-        {
-            ValidateCreate(data);
-
-            var e = Mapper.Map<Advertiser>(data);
+            var e = Mapper.Map<Slot>(data);
             e.ID = Guid.NewGuid();
             e.CreatedOn = DateTime.UtcNow;
             //e.CreatedByID = UserId;
@@ -82,12 +72,12 @@ namespace AdsVenture.Core.Managers
             return e;
         }
 
-        public Advertiser Update(DTO.AdvertiserUpdate data)
+        public Slot Update(DTO.SlotUpdate data)
         {
             var e = Find(data.ID);
 
             if (e == null)
-                throw new Exceptions.EntityNotFoundException<Advertiser>();
+                throw new Exceptions.EntityNotFoundException<Slot>();
 
             e = Mapper.Map(data, e);
             e.UpdatedOn = DateTime.UtcNow;
@@ -114,7 +104,7 @@ namespace AdsVenture.Core.Managers
             }
         }
 
-        private void Delete(Advertiser e)
+        private void Delete(Slot e)
         {
             e.Active = false;
             e.UpdatedOn = DateTime.UtcNow;

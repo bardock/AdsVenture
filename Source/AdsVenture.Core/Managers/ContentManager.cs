@@ -34,9 +34,10 @@ namespace AdsVenture.Core.Managers
             return GetActiveQuery().FirstOrDefault(x => x.ID == id);
         }
 
-        public virtual List<Content> FindAll()
+        public virtual List<Content> FindAll(
+            bool includeAdvertiser = false)
         {
-            return GetActiveQuery().ToList();
+            return GetActiveQuery(includeAdvertiser: includeAdvertiser).ToList();
         }
 
         public virtual List<Content> FindAll(Guid[] ids)
@@ -52,9 +53,10 @@ namespace AdsVenture.Core.Managers
 
             if (pageParams != null && !string.IsNullOrEmpty(pageParams.Search))
             {
-                query = query.Where(p => 
-                    p.Title.Contains(pageParams.Search)
-                    || p.Advertiser.Name.Contains(pageParams.Search));
+                query = query.Where(x =>
+                    x.ID.ToString().Contains(pageParams.Search)
+                    || x.Title.Contains(pageParams.Search)
+                    || x.Advertiser.Name.Contains(pageParams.Search));
             }
 
             return query.Order(pageParams, x => x.ID).Page(pageParams);
