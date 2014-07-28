@@ -1,7 +1,9 @@
-var Publisher;
+﻿var Publisher;
 (function (Publisher) {
     var SDK = (function () {
         function SDK() {
+            this.IFRAME_MESSAGE_USER_SLOT_EVENT = "__UserSlotEvent__";
+            this.IFRAME_MESSAGE_RESIZE = "__Resize__";
             this.on = (function () {
                 if ("addEventListener" in window) {
                     return function (target, type, listener) {
@@ -50,18 +52,32 @@ var Publisher;
                 iframe.src = iframe.src + (iframe.src.indexOf("?") == -1 ? "?" : "&") + "avt_ref=" + encodeURIComponent(window.location.href);
 
                 _this.on(iframe, "load", function (e) {
-                    _this.on(window, 'message', function (e) {
-                        if (iframe.src.indexOf(e.origin) == -1)
-                            return;
-                        var data = JSON.parse(e.data);
-                        console.log(data); // TODO remove
-                        data.contentID = contentID;
-                        _this.api("POST", "http://dev.content.avt.com/api/contentDelivery/slot/" + slotID + "/event", data);
-                    });
+                    _this.bindSlotEvents(iframe, contentID, slotID);
+                    _this.bindResponsive(container, iframe);
                 });
 
                 container.appendChild(iframe);
             };
+        };
+
+        SDK.prototype.bindSlotEvents = function (iframe, contentID, slotID) {
+            var _this = this;
+            this.onIframeMessage(iframe, this.IFRAME_MESSAGE_USER_SLOT_EVENT, function (data) {
+                data.contentID = contentID;
+                _this.api("POST", "http://dev.content.avt.com/api/contentDelivery/slot/" + slotID + "/event", data);
+            });
+        };
+
+        SDK.prototype.bindResponsive = function (container, iframe) {
+            if (!this.elemHasClass(container, "avt-responsive"))
+                return;
+            this.onIframeMessage(iframe, this.IFRAME_MESSAGE_RESIZE, function (data) {
+                container.style.height = data.height + 2;
+            });
+        };
+
+        SDK.prototype.elemHasClass = function (element, _class) {
+            return (' ' + element.className + ' ').indexOf(' ' + _class + ' ') > -1;
         };
 
         // TODO: move to a helper class
@@ -85,6 +101,18 @@ var Publisher;
             } else {
                 xmlhttp.send();
             }
+        };
+
+        SDK.prototype.onIframeMessage = function (iframe, type, handler) {
+            this.on(window, 'message', function (e) {
+                if (iframe.src.indexOf(e.origin) == -1)
+                    return;
+                var indexOfType = e.data.indexOf(type);
+                if (indexOfType == -1)
+                    return;
+                var data = JSON.parse(e.data.substring(indexOfType + type.length));
+                handler(data);
+            });
         };
         return SDK;
     })();

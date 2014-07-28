@@ -2,19 +2,29 @@ module Advertiser {
 
     export class SDK {
 
+        private IFRAME_MESSAGE_USER_SLOT_EVENT = "__UserSlotEvent__";
+        private IFRAME_MESSAGE_RESIZE = "__Resize__";
+
         referrer: string;
+        height: number;
 
         constructor() {
             this.referrer = document.referrer;
-            var body = document.getElementsByTagName("body")[0];
-            body.onclick = (e) => this.handleEvent(e);
-            body.onsubmit = (e) => this.handleEvent(e);
+            window.onload = () => {
+                var body = document.getElementsByTagName("body")[0];
+                this.on(body, "click", (e) => this.handleUserSlotEvent(e));
+                this.on(body, "submit", (e) => this.handleUserSlotEvent(e));
+
+                this.handleResize(null);
+                this.on(window, "resize", (e) => this.handleResize(e));
+            };
         }
 
-        handleEvent(e: Event) {
+        handleUserSlotEvent(e: Event) {
             var target = (<HTMLElement>e.target);
-            window.parent.postMessage(
-                JSON.stringify({
+            this.postMessage(
+                this.IFRAME_MESSAGE_USER_SLOT_EVENT,
+                {
                     eventType: e.type,
                     positionX: (<any>e).x,
                     positionY: (<any>e).y,
@@ -31,9 +41,35 @@ module Advertiser {
                         method: target.getAttribute("method"),
                     },
                     date: new Date()
-                }),
+                }
+            );
+        }
+
+        handleResize(e: Event) {
+            if (this.height == this.getDocumentHeight())
+                return;
+            this.height = this.getDocumentHeight();
+            this.postMessage(
+                this.IFRAME_MESSAGE_RESIZE,
+                { height: this.height }
+            );
+        }
+
+        postMessage(type: string, data: any) {
+            window.parent.postMessage(
+                type + JSON.stringify(data),
                 this.referrer
             );
+        }
+
+        getDocumentHeight(): number {
+            var body = document.body,
+                html = document.documentElement;
+
+            return Math.max(
+                body.offsetHeight,
+                html.scrollHeight,
+                html.offsetHeight);
         }
 
         getQueryValue(name: string) {
@@ -46,6 +82,21 @@ module Advertiser {
                 }
             }
         }
+
+        private on = (function () {
+            if ("addEventListener" in window) {
+                return function (target, type, listener) {
+                    target.addEventListener(type, listener, false);
+                };
+            }
+            else {
+                return function (object, sEvent, fpNotify) {
+                    object.attachEvent("on" + sEvent, function () {
+                        fpNotify(window.event);
+                    });
+                };
+            }
+        } ());
     }
 }
 new Advertiser.SDK();

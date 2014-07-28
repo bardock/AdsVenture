@@ -2,6 +2,9 @@ module Publisher {
 
     export class SDK {
 
+        private IFRAME_MESSAGE_USER_SLOT_EVENT = "__UserSlotEvent__";
+        private IFRAME_MESSAGE_RESIZE = "__Resize__";
+
         constructor() {
             this.initStyles();
             var containers = document.querySelectorAll(".avt-container");
@@ -44,7 +47,7 @@ module Publisher {
 
         private getAppendContentHandler(container: HTMLElement, slotID: string) {
             return response => {
-                var contentID = response.contentID;
+                var contentID = <string>response.contentID;
 
                 //container.insertAdjacentHTML('beforeend', response);
                 //var iframe = <HTMLIFrameElement>container.lastChild;
@@ -59,25 +62,37 @@ module Publisher {
                     + encodeURIComponent(window.location.href);
 
                 this.on(iframe, "load", (e) => {
-                    this.on(window, 'message', (e) => {
-                        if (iframe.src.indexOf(e.origin) == -1)
-                            return;
-                        var data = JSON.parse(e.data);
-                        console.log(data); // TODO remove
-                        data.contentID = contentID;
-                        this.api("POST",
-                            "http://dev.content.avt.com/api/contentDelivery/slot/" + slotID + "/event",
-                            data
-                        );
-                    });
+                    this.bindSlotEvents(iframe, contentID, slotID);
+                    this.bindResponsive(container, iframe);
                 });
 
                 container.appendChild(iframe);
             };
         }
 
+        private bindSlotEvents(iframe: HTMLIFrameElement, contentID: string, slotID: string) {
+            this.onIframeMessage(iframe, this.IFRAME_MESSAGE_USER_SLOT_EVENT, (data) => {
+                data.contentID = contentID;
+                this.api("POST",
+                    "http://dev.content.avt.com/api/contentDelivery/slot/" + slotID + "/event",
+                    data);
+            });
+        }
+
+        private bindResponsive(container: HTMLElement, iframe: HTMLIFrameElement) {
+            if (!this.elemHasClass(container, "avt-responsive"))
+                return;
+            this.onIframeMessage(iframe, this.IFRAME_MESSAGE_RESIZE, (data) => {
+                container.style.height = data.height + 2;
+            });
+        }
+
+        private elemHasClass(element: HTMLElement, _class: string) {
+            return (' ' + element.className + ' ').indexOf(' ' + _class + ' ') > -1;
+        }
+
         // TODO: move to a helper class
-        api(method: string, url: string, data, onSuccess?: (any) => void) {
+        private api(method: string, url: string, data, onSuccess?: (any) => void) {
             var xmlhttp: XMLHttpRequest =
                 (<any>window).XMLHttpRequest
                     ? new XMLHttpRequest()
@@ -103,7 +118,7 @@ module Publisher {
             }
         }
 
-        on = (function () {
+        private on = (function () {
             if ("addEventListener" in window) {
                 return function (target, type, listener) {
                     target.addEventListener(type, listener, false);
@@ -117,6 +132,18 @@ module Publisher {
                 };
             }
         } ());
+
+        private onIframeMessage(iframe: HTMLIFrameElement, type: string, handler: (any) => any) {
+            this.on(window, 'message', (e: MessageEvent) => {
+                if (iframe.src.indexOf(e.origin) == -1)
+                    return;
+                var indexOfType = e.data.indexOf(type);
+                if (indexOfType == -1)
+                    return;
+                var data = JSON.parse((<string>e.data).substring(indexOfType + type.length));
+                handler(data);
+            });
+        }
     }
 }
 new Publisher.SDK();

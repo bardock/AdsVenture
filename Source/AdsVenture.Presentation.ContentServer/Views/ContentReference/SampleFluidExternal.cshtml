@@ -7,7 +7,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/css/site")
 
     <style>
         #sample {
@@ -51,7 +50,7 @@
         js = d.createElement(s); js.id = id;
         js.src = "@Url.Content("//dev.content.avt.com/scripts/advertiser/sdk.js")";
         fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'avt-publisher-sdk'));</script>
+    }(document, 'script', 'avt-advertiser-sdk'));</script>
 
 </body>
 </html>
