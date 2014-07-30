@@ -42,3 +42,136 @@
         <a class="btn btn-link btn_negative" href="@Url.Action("")">@Resources.Global.Cancel</a>
     </div>
 </form>
+
+<hr />
+<h3>Events</h3>
+
+@if (Model.Events != null)
+{
+    var HtmlEvent = Html.ToInnerModel(x => x.Events).ToItemModel();
+
+    <table id="tableEvents" class="table table-striped table-bordered no-wrap dt-responsive">
+        <thead>
+            <tr>
+                <th>
+                    @HtmlEvent.DisplayEntityNameFor(m => m.SlotID)
+                </th>
+                <th>
+                    @HtmlEvent.DisplayEntityNameFor(m => m.ContentID)
+                </th>
+                <th>
+                    @HtmlEvent.DisplayEntityNameFor(m => m.Date)
+                </th>
+                <th>
+                    @HtmlEvent.DisplayEntityNameFor(m => m.EventType)
+                </th>
+                <th>
+                    @HtmlEvent.DisplayEntityNameFor(m => m.PositionX)
+                </th>
+                <th>
+                    @HtmlEvent.DisplayEntityNameFor(m => m.PositionY)
+                </th>
+                <th>
+                    @HtmlEvent.DisplayEntityNameFor(m => m.Target.TagName)
+                </th>
+                <th>
+                    @HtmlEvent.DisplayEntityNameFor(m => m.Target.ElemId)
+                </th>
+                <th>
+                    @HtmlEvent.DisplayEntityNameFor(m => m.Target.ElemClass)
+                </th>
+                <th>
+                    @HtmlEvent.DisplayEntityNameFor(m => m.Target.Name)
+                </th>
+                <th>
+                    @HtmlEvent.DisplayEntityNameFor(m => m.Target.Type)
+                </th>
+                <th>
+                    @HtmlEvent.DisplayEntityNameFor(m => m.Target.Value)
+                </th>
+                <th>
+                    @HtmlEvent.DisplayEntityNameFor(m => m.Target.Href)
+                </th>
+                <th>
+                    @HtmlEvent.DisplayEntityNameFor(m => m.Target.Onclick)
+                </th>
+                <th>
+                    @HtmlEvent.DisplayEntityNameFor(m => m.Target.Action)
+                </th>
+                <th>
+                    @HtmlEvent.DisplayEntityNameFor(m => m.Target.Method)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in Model.Events)
+            {
+                HtmlEvent = Html.ToInnerModel(x => x.Events).ToItemModel(m);
+                <tr>
+                    <td>
+                        <div class="td-no-wrap" title="@m.SlotID">
+                            @m.SlotID
+                        </div>
+                    </td>
+                    <td>
+                        <div class="td-no-wrap" title="@m.ContentID">
+                            @m.ContentID
+                        </div>
+                    </td>
+                    <td>
+                        <div class="td-no-wrap" title="@m.Date">
+                            @m.Date
+                        </div>
+                    </td>
+                    <td>
+                        @(m.Discriminator == SlotEventDiscriminator.Impression ? "Impression" : m.EventType)
+                    </td>
+                    <td>
+                        @m.PositionX
+                    </td>
+                    <td>
+                        @m.PositionY
+                    </td>
+                    <td>
+                        @m.Target.TagName
+                    </td>
+                    <td>
+                        @m.Target.ElemId
+                    </td>
+                    <td>
+                        @m.Target.ElemClass
+                    </td>
+                    <td>
+                        @m.Target.Name
+                    </td>
+                    <td>
+                        @m.Target.Type
+                    </td>
+                    <td>
+                        @m.Target.Value
+                    </td>
+                    <td>
+                        @m.Target.Href
+                    </td>
+                    <td>
+                        @m.Target.Onclick
+                    </td>
+                    <td>
+                        @m.Target.Action
+                    </td>
+                    <td>
+                        @m.Target.Method
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@section scripts {
+    <script>
+        $('#tableEvents').DataTable({
+            responsive: true
+        });
+    </script>
+}

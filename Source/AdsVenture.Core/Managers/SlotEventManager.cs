@@ -42,6 +42,7 @@ namespace AdsVenture.Core.Managers
         {
             return GetQuery()
                 .Where(x => x.CampaignID == campaignID)
+                .OrderByDescending(x => x.Date)
                 .ToList();
         }
 

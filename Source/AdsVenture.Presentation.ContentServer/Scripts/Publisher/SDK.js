@@ -1,4 +1,4 @@
-﻿var Publisher;
+var Publisher;
 (function (Publisher) {
     var SDK = (function () {
         function SDK() {

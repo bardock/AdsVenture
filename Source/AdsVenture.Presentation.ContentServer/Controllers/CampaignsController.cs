@@ -14,13 +14,16 @@ namespace AdsVenture.Presentation.ContentServer.Controllers
     {
         private readonly CampaignManager _manager;
         private readonly AdvertiserManager _advertiserManager;
+        private readonly SlotEventManager _slotEventManager;
 
         public CampaignsController(
             CampaignManager mediagroupmanager,
-            AdvertiserManager advertiserManager)
+            AdvertiserManager advertiserManager,
+            SlotEventManager slotEventManager)
         {
             this._manager = mediagroupmanager;
             this._advertiserManager = advertiserManager;
+            this._slotEventManager = slotEventManager;
         }
 
         public ActionResult Index()
@@ -84,7 +87,10 @@ namespace AdsVenture.Presentation.ContentServer.Controllers
             { 
                 e = Mapper.Map(data, e);
             }
-            return GetFormView(e);
+
+            var events = _slotEventManager.FindAllByCampaign(id);
+
+            return GetFormView(e, events: events);
         }
 
         [HttpPost]
@@ -107,13 +113,14 @@ namespace AdsVenture.Presentation.ContentServer.Controllers
             return GetEditView(data.ID, data);
         }
 
-        private ActionResult GetFormView(Commons.Entities.Campaign e = null, bool isNew = false)
+        private ActionResult GetFormView(Commons.Entities.Campaign e = null, bool isNew = false, List<Commons.Entities.SlotEvent> events = null)
         {
             var model = new Models.Campaigns.Form()
             {
                 IsNew = isNew,
                 AdvertiserOptions = OptionsList.Create(_advertiserManager.FindAll(), display: x => x.Name, value: x => x.ID),
-                Entity = e
+                Entity = e,
+                Events = events
             };
             return View("Form", model);
         }

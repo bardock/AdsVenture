@@ -1,4 +1,4 @@
-﻿var Advertiser;
+var Advertiser;
 (function (Advertiser) {
     var SDK = (function () {
         function SDK() {

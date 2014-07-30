@@ -36,4 +36,9 @@ input[type="checkbox"].input-validation-error {
 .col-check {
   width: 13px;
 }
+.td-no-wrap {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 /*# sourceMappingURL=site.css.map */
