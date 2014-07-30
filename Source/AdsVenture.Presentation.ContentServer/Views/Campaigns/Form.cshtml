@@ -109,14 +109,14 @@
                 HtmlEvent = Html.ToInnerModel(x => x.Events).ToItemModel(m);
                 <tr>
                     <td>
-                        <div class="td-no-wrap" title="@m.SlotID">
+                        <a href="@Url.Action("edit", "slots", new { id = m.SlotID })" class="td-no-wrap" title="@m.SlotID">
                             @m.SlotID
-                        </div>
+                        </a>
                     </td>
                     <td>
-                        <div class="td-no-wrap" title="@m.ContentID">
+                        <a href="@Url.Action("edit", "contents", new { id = m.ContentID })" class="td-no-wrap" title="@m.ContentID">
                             @m.ContentID
-                        </div>
+                        </a>
                     </td>
                     <td>
                         <div class="td-no-wrap" title="@m.Date">
