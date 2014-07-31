@@ -14,7 +14,7 @@
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
     js = d.createElement(s); js.id = id;
-    js.src = "@Url.Content("//dev.content.avt.com/scripts/publisher/sdk.js")";
+    js.src = "@Url.Content(ConfigSection.Default.BaseUrl + "scripts/publisher/sdk.js")";
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'avt-publisher-sdk'));</script>
 

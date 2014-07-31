@@ -16,6 +16,14 @@ namespace AdsVenture.Presentation.ContentServer.Helpers
             get { return (ConfigSection)ConfigurationManager.GetSection("adsVenture/presentation/contentServer"); }
         }
 
+        [DataMember]
+        [ConfigurationProperty("baseUrl", IsRequired = true)]
+        public string BaseUrl
+        {
+            get { return (string)this["baseUrl"]; }
+            set { this["baseUrl"] = value; }
+        }
+
         [IgnoreDataMember]
         [ConfigurationProperty("accessCode")]
         public AccessCodeConfigurationElement AccessCodeConfiguration

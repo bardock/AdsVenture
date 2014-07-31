@@ -17,6 +17,9 @@ var Publisher;
                     };
                 }
             }());
+            this.baseUrl = document.getElementById('avt-publisher-sdk').getAttribute("src");
+            this.baseUrl = this.baseUrl.substring(0, this.baseUrl.indexOf("scripts/"));
+
             this.initStyles();
             var containers = document.querySelectorAll(".avt-container");
             for (var i = 0; i < containers.length; i++) {
@@ -24,7 +27,7 @@ var Publisher;
                 var slot = c.getAttribute("data-slot");
                 if (!slot)
                     return;
-                this.api("GET", "http://dev.content.avt.com/api/contentDelivery/slot/" + slot, null, this.getAppendContentHandler(c, slot));
+                this.api("GET", this.baseUrl + "api/contentDelivery/slot/" + slot, null, this.getAppendContentHandler(c, slot));
             }
         }
         SDK.prototype.initStyles = function () {
@@ -64,7 +67,7 @@ var Publisher;
             var _this = this;
             this.onIframeMessage(iframe, this.IFRAME_MESSAGE_USER_SLOT_EVENT, function (data) {
                 data.contentID = contentID;
-                _this.api("POST", "http://dev.content.avt.com/api/contentDelivery/slot/" + slotID + "/event", data);
+                _this.api("POST", _this.baseUrl + "api/contentDelivery/slot/" + slotID + "/event", data);
             });
         };
 

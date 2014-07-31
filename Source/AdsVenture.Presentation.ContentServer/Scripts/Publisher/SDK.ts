@@ -5,7 +5,12 @@ module Publisher {
         private IFRAME_MESSAGE_USER_SLOT_EVENT = "__UserSlotEvent__";
         private IFRAME_MESSAGE_RESIZE = "__Resize__";
 
+        private baseUrl: string;
+
         constructor() {
+            this.baseUrl = document.getElementById('avt-publisher-sdk').getAttribute("src");
+            this.baseUrl = this.baseUrl.substring(0, this.baseUrl.indexOf("scripts/"));
+
             this.initStyles();
             var containers = document.querySelectorAll(".avt-container");
             for (var i = 0; i < containers.length; i++) {
@@ -13,7 +18,7 @@ module Publisher {
                 var slot = c.getAttribute("data-slot");
                 if (!slot) return;
                 this.api("GET",
-                    "http://dev.content.avt.com/api/contentDelivery/slot/" + slot,
+                    this.baseUrl + "api/contentDelivery/slot/" + slot,
                     null,
                     this.getAppendContentHandler(c, slot)
                 );
@@ -74,7 +79,7 @@ module Publisher {
             this.onIframeMessage(iframe, this.IFRAME_MESSAGE_USER_SLOT_EVENT, (data) => {
                 data.contentID = contentID;
                 this.api("POST",
-                    "http://dev.content.avt.com/api/contentDelivery/slot/" + slotID + "/event",
+                    this.baseUrl + "api/contentDelivery/slot/" + slotID + "/event",
                     data);
             });
         }

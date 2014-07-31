@@ -319,6 +319,8 @@
     <None Include="MvcSiteMapSchema.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\PublishProfiles\plg - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\plg - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Production.pubxml" />
     <None Include="Properties\PublishProfiles\Staging.pubxml" />
     <Content Include="Scripts\Extensions\jquery.numeric.js" />
