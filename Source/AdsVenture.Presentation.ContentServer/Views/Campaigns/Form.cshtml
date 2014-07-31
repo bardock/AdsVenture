@@ -107,6 +107,7 @@
             @foreach (var m in Model.Events)
             {
                 HtmlEvent = Html.ToInnerModel(x => x.Events).ToItemModel(m);
+                m.Target = m.Target ?? new SlotEventTarget();
                 <tr>
                     <td>
                         <a href="@Url.Action("edit", "slots", new { id = m.SlotID })" class="td-no-wrap" title="@m.SlotID">

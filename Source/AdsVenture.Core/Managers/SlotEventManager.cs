@@ -41,6 +41,7 @@ namespace AdsVenture.Core.Managers
         public virtual List<SlotEvent> FindAllByCampaign(Guid campaignID)
         {
             return GetQuery()
+                .Include(x => x.Target)
                 .Where(x => x.CampaignID == campaignID)
                 .OrderByDescending(x => x.Date)
                 .ToList();

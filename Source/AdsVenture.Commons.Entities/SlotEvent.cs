@@ -41,13 +41,15 @@ namespace AdsVenture.Commons.Entities
 
         public SlotEvent()
         {
-            Target = new SlotEventTarget();
         }
     }
 
     public class SlotEventTarget
     {
-        public Guid ID { get; set; }
+        [Key]
+        public Guid SlotEventID { get; set; }
+
+        public virtual SlotEvent SlotEvent { get; set; }
 
         [MaxLength(10)]
         public string TagName { get; set; }

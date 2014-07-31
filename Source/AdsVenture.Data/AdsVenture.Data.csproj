@@ -116,6 +116,10 @@
     <Compile Include="Migrations\201407272236205_SlotEvent-Impression.Designer.cs">
       <DependentUpon>201407272236205_SlotEvent-Impression.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201407310311416_SlotEventTarget.cs" />
+    <Compile Include="Migrations\201407310311416_SlotEventTarget.Designer.cs">
+      <DependentUpon>201407310311416_SlotEventTarget.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -162,6 +166,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201407272236205_SlotEvent-Impression.resx">
       <DependentUpon>201407272236205_SlotEvent-Impression.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407310311416_SlotEventTarget.resx">
+      <DependentUpon>201407310311416_SlotEventTarget.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

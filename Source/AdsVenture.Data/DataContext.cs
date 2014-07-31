@@ -27,12 +27,9 @@ namespace AdsVenture.Data
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
 
-            // SlotEvent & Target (Table Splitting)
             modelBuilder.Entity<SlotEvent>()
-                        .HasRequired(e => e.Target)
-                        .WithRequiredPrincipal();
-            modelBuilder.Entity<SlotEvent>().ToTable("SlotEvent");
-            modelBuilder.Entity<SlotEventTarget>().ToTable("SlotEvent");
+                        .HasOptional(e => e.Target)
+                        .WithRequired(t => t.SlotEvent);
         }
 
         #region DbSets
